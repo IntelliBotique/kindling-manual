@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K.4 Curation as a Craft · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders">For builders</a><a href="/curators" aria-current="page">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K.4">
+<div class="wrap ed-measure">
+<p class="eyebrow">For curators · Article I · Written for this edition</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K.4</span> Curation as a Craft</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>"If you already introduce people, you are a curator." The How page at kindling.foundation says it, and the protocol site admits what is missing: "The first curators are deciding what curation is as a craft." CONTRIBUTING.md calls curation "the most important and least understood role in the network" and promises that "a written curator playbook will be published alongside v0.1.1." On October 4, 2026, the v0.1.1 text was published (though not yet tagged as a release). No playbook was in the repository or on either site.</p>
+<p>Until the playbook exists, this chapter gathers what the specification already requires of a curator, by section, adds the questions a new curator has to answer for themselves, and points to the manual's chapters on contracts and risk. Every example is invented and labeled so. A Pool is a mechanism for people who want to be found to say yes. It does not promise that anyone will meet, and nothing here should be read as a promise of connection.</p>
+<h2 id="k4-what-a-curator-does-in-the-spec-s-terms">What a curator does, in the spec's terms</h2>
+<p>You never list anyone silently. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a>: "A Profile MUST NOT be added to a Pool without the owner's explicit consent. Silent inclusion is forbidden. There is no exception."</p>
+<p>Inside that rule the specification names 4 things a curator does. You write a manifest with a charter (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>). You submit profile URLs, and the handshake does the asking (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a>). You answer removal requests, complaints and disputes at the address in <code>curator_contact</code>, which the schema describes as "How a profile owner can reach the curator about removal, complaints, disputes." And you keep acting, because "A Curator is considered inactive if they have taken no curation action (handshake review, manifest edit, removal response) for 90 days." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>)</p>
+<h2 id="k4-the-charter">The charter</h2>
+<p>An owner reads the charter before anything else about you. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a> puts it in every handshake, and the confirmation step must show "the Pool's name, charter, curator and visibility." Write it for the person deciding whether to say yes.</p>
+<p><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a> makes it a required field and says only "free-text description." The schema says more: at least 20 characters, and "Free-text description of what the Pool is for and what it isn't. Required, plain text in v0.1." The How page gives the curator's version: "Name the Pool, say what it is for and what it is not, and choose who can see it."</p>
+<p>Six questions a charter can answer, in this order:</p>
+<ol>
+<li>Who is it for? Name roles and situations, not demographics.</li>
+<li>What is it for?</li>
+<li>What is it not for? Put the negative before the positive if that is the line people most need to see.</li>
+<li>How do people come in? Name the consent model in words.</li>
+<li>How does someone leave? The answer is always the same: any time, processed within 60 seconds (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>).</li>
+<li>What do you, the curator, do with the list, and what do you never do with it?</li>
+</ol>
+<p>An invented example, for illustration only:</p>
+<blockquote>
+<p><em>Invented example.</em> "Night Shift Neighbors (an invented Pool). For people in and around an invented town who work nights and would like company at hours when most places are closed: a walk at 7 a.m., breakfast after a shift, someone to text on a long night. Not for dating, recruiting, selling or promotion. The curator asks each person by email before listing them; nobody is added without a yes. Leave any time from any message. The list is never sold, shared outside this Pool, or ranked."</p>
+</blockquote>
+<h2 id="k4-visibility">Visibility</h2>
+<p>Pick by who should be able to find the list, and know what each value does not do. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a> offers 3: <code>public</code>, <code>unlisted</code> and <code>invite-only</code>.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>What it does</th>
+<th>What it does not do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public</code></td>
+<td>Can be listed in the well-known file (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-2">§10.2</a>) and registries</td>
+<td>Does not make anyone's page more public than it already is</td>
+</tr>
+<tr>
+<td><code>unlisted</code></td>
+<td>Left out of the well-known file, so "no crawler or registry sees" it (the protocol site's registry page)</td>
+<td>It is not secret. RFC 0002: "An <code>unlisted</code> Pool isn't secret: its URL is just not in the public registry. Curators should be told this plainly."</td>
+</tr>
+<tr>
+<td><code>invite-only</code></td>
+<td>Invitations are personal</td>
+<td>Auto-accept never applies: "An invitation to an invite-only Pool is personal, so the owner always answers it" (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-5">§5.5</a>)</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>RFC 0002 says "the README and CONTRIBUTING.md say so" about unlisted Pools. On the research date neither file did. Tell your members yourself.</p>
+<h2 id="k4-choosing-a-consent-model">Choosing a consent model</h2>
+<p>The floor never moves. Stricter Pools "MAY add pre-handshake steps but MUST NOT remove the owner's ability to decline or withdraw." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-4">§5.4</a>) RFC 0002 states it from the other side: the stricter models "never let the Curator skip consent entirely."</p>
+<p>The manifest names one of 3 models. The spec leaves what the stricter two add undefined, so the middle column below follows the sites' examples: the Pools page's "Only the curators may propose names," and the invented Drip Line's belay-check vouch. In each, the floor is the same.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>What it adds before the handshake</th>
+<th>When it fits</th>
+<th>What it can never remove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>universal-opt-in</code></td>
+<td>Nothing; literally the default value in the schema</td>
+<td>Open Pools where anyone with a page may be asked</td>
+<td>The owner's yes, and the right to leave</td>
+</tr>
+<tr>
+<td><code>vouching-required</code></td>
+<td>A vouch from someone the curator trusts</td>
+<td>Pools where trust is the point, such as the invented Drip Line's belay check</td>
+<td>The same</td>
+</tr>
+<tr>
+<td><code>curator-only-adds</code></td>
+<td>Only the curator may submit</td>
+<td>Small, invitation-shaped Pools; the project's own Founding Curators Pool uses it</td>
+<td>The same</td>
+</tr>
+</tbody>
+</table></div>
+<p>A vouch stays where it was given. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-4">§4.4</a>: "The identity is local to that Pool and MUST NOT automatically apply to other Pools."</p>
+<h2 id="k4-the-rules-you-enforce">The rules you enforce</h2>
+<p>These bind the Pool, which in practice means they bind you. Your software applies most of them. Your part is noticing when it does not.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Section</th>
+<th>What it asks of the curator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No silent inclusion</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a></td>
+<td>Every entry has a <code>consent_proof</code> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>). Never add an entry by hand without one.</td>
+</tr>
+<tr>
+<td>A decline is remembered</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a></td>
+<td>A declined URL "MUST NOT be re-submitted by the same Curator without owner permission." Keep the record.</td>
+</tr>
+<tr>
+<td>Silence expires</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a></td>
+<td>No answer within <code>handshake_window_days</code> (literally 14 unless you set it) and the request lapses. This part is advice: do not chase.</td>
+</tr>
+<tr>
+<td>Leaving in a minute</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a></td>
+<td>"Implementations MUST process withdrawal within 60 seconds of receipt." Test it.</td>
+</tr>
+<tr>
+<td>Level shown every time</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a></td>
+<td>A conforming UI "MUST render it alongside every Profile." Your own level is shown to owners too (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>).</td>
+</tr>
+<tr>
+<td>Auto-accept</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-5">§5.5</a></td>
+<td>"Auto-accept defaults to off," at most 5 rules, "Every auto-accept event MUST produce a notification to the owner."</td>
+</tr>
+<tr>
+<td>Noindex</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a></td>
+<td>A page carrying <code>kindling-noindex</code> cannot be in your Pool. Refuse the submission.</td>
+</tr>
+<tr>
+<td>Re-parse</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-6">§2.6</a></td>
+<td>Re-parse on the owner's update; collapse pushes "within any 24-hour window into a single re-parse."</td>
+</tr>
+<tr>
+<td>Dormancy</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a></td>
+<td>90 days without a curation action and the Pool goes <code>dormant</code>; members "MUST see a notice."</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<h2 id="k4-block-lists">Block lists</h2>
+<p>Shared lists are the third spam layer, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a> spells out who publishes and who subscribes: "The Kindling project MUST publish a public block list of known abusers, identified by Kindling identity. Third parties MAY publish their own block lists. Implementations MUST be able to subscribe to one or more lists and filter accordingly." A Pool subscribes in its manifest, under <code>messaging_preferences.block_list_subscriptions</code>, a list of URLs (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-3">§3.3</a>).</p>
+<p>Read a list before you subscribe to it. On October 4, 2026 the project's own, at protocol.kindling.foundation/blocklist.json, described itself as "The block list the Kindling project will publish under SPEC.md <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a>," and said "The entries here are illustrative until the registry opens." Its 2 entries are illustrative. For any list, find out who publishes it, what its reason categories are, and how someone is removed. The framework leaves the hardest part as future work: a convention for "getting a person onto a block list in the first place."</p>
+<h2 id="k4-your-own-exposure">Your own exposure</h2>
+<p>The specification makes you the person an owner writes to. It stops there. It does not make you a lawyer, an insurer or a moderator of anyone's conduct outside the Pool. This is not legal advice; the manual's chapters cover what to check.</p>
+<p>What you hold is personal data: profile URLs, cached parsed profiles (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>), consent proofs with times, decline records, and the email addresses verification and messaging run on (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-2">§4.2</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a>). <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.7">Ch 4.7</a> covers privacy law, and a Pool open to people in several places can reach more than one regime.</p>
+<p>What you promise is the charter. It is not a contract. If you run Pools for an organization, the arrangement between you and the organization is one, and <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.3">Ch 4.3</a> covers the clauses to put in writing: scope, liability, confidentiality and what happens to the Pool when the arrangement ends. If you charge for something beside the Pool (<a class="ed-x" href="/curators/k3">Chapter K.3</a>), <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.3">Ch 4.3</a>'s terms-of-service section applies to that thing.</p>
+<p>What can go wrong fits on <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.8">Ch 4.8</a>'s one-page risk register. An invented example:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Risk (invented example)</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>What covers it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A withdrawal is not processed in time</td>
+<td>Low</td>
+<td>High</td>
+<td>A tested withdrawal path (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>); a weekly check</td>
+</tr>
+<tr>
+<td>Someone in the Pool misuses an introduction</td>
+<td>Medium</td>
+<td>High</td>
+<td><code>accept_from</code> rules (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-2">§7.2</a>); a block list (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a>); a conduct line in the charter</td>
+</tr>
+<tr>
+<td>You go quiet for a season</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>A named co-curator in the manifest; co-curators are "first in line" (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-3">§9.3</a>)</td>
+</tr>
+<tr>
+<td>A request to remove someone else's data</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>A written reply procedure at <code>curator_contact</code></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>Review it quarterly, and when the Pool changes shape, as <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.8">Ch 4.8</a> says.</p>
+<h2 id="k4-leaving-well">Leaving well</h2>
+<p>Name a co-curator on the day you start, and show them where the decline records and consent proofs live. The Pool will outlive you by design. After 90 days the Pool goes dormant; "Any active member MAY nominate themselves or another active member"; success needs "at least two-thirds of responding active members" within 14 days; "Co-curators listed in the manifest are first in line." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-3">§9.3</a>) Failing that, it archives and stays readable (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-4">§9.4</a>).</p>
+<h2 id="k4-the-founding-curators-pool">The Founding Curators Pool</h2>
+<p>Status on October 4, 2026: Planned. The project means it for its first curators, and its own charter reads: "People who already do introduction work, invited by the maintainers to run the first Pools and write down what curation is as a craft. Maintainers propose; every person still accepts or declines, and can leave within a minute. This Pool is not a waiting list for anything and nobody pays to be in it." Its consent model is <code>curator-only-adds</code>.</p>
+<p>The Pools page says "They are not open yet, and nobody is in them," and every member shown is invented. The project's own well-known file at kindling.foundation/.well-known/kindling-pool lists none of them, so no crawler will read a planned Pool as live.</p>
+<p>The How page gives the way in: "If you would like to be one of the real ones, write to hello@kindling.foundation." And: "It is not a waiting list for anything, and nobody pays to take part." The same page sends anyone who wants to run a Pool now to <code>maintainers@kindling.foundation</code>.</p>
+<p><a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-10.4">Chapter 10.4</a> leads Volume 10 in this edition. Read it for yourself first. Introduction work is still work, and <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-10.4">Ch 10.4</a> is plain that you can be "surrounded by people and lonely."</p>
+<h2 id="k4-field-exercises">Field exercises</h2>
+<ol>
+<li>Write your Pool's charter answering the 6 questions. Label any example people invented. <em>Done when</em> it is at least 20 characters, says what the Pool is not for, and a stranger can say yes or no from it alone.</li>
+<li>Choose a consent model and a visibility, and write one sentence for each saying why. <em>Done when</em> both sentences name what the choice cannot do.</li>
+<li>Run an invented profile through your whole handshake: ask, confirm on the page, decline, re-ask, accept, withdraw. <em>Done when</em> the re-ask is refused, and the withdrawal is processed within 60 seconds by the clock.</li>
+<li>Read every block list you plan to subscribe to. <em>Done when</em> you can name each publisher, its reason categories and its removal process, or you have decided not to subscribe.</li>
+<li>Fill in a 4-row risk register for your Pool. <em>Done when</em> every row names what covers it and a co-curator is in the manifest.</li>
+<li>Write to hello@kindling.foundation if you want to be a founding curator, saying what introduction work you already do. <em>Done when</em> the message is sent, or you have written down why not yet.</li>
+</ol>
+</div>
+<section class="ed-leans" aria-labelledby="leans-t"><h2 id="leans-t">Where this chapter leans on the Field Manual</h2><p class="ed-small">Field Manual chapters live on solo.joshwolf.net, the Library edition. Volume 1 and Chapter 10.9 are open there; the rest open free with an email. Each link here carries a note for a Kindling reader.</p><ul class="ed-rows"><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-4.3"><span class="ed-ch-num">4.3</span> <span class="ed-row-t">Contracts</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> The terms-of-service section teaches clickwrap. A Kindling Pool’s consent record is the <code>consent_proof</code> of <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>, set by a button that sends a POST on a confirmation page (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a>). See <a class="ed-x" href="/curators/k4">K.4</a>.</p></li><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-4.8"><span class="ed-ch-num">4.8</span> <span class="ed-row-t">Risk: Insurance, Disputes and Lawyers</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> <a class="ed-x" href="/curators/k4">K.4</a> has an invented risk register for a curator, on this chapter’s one-page form.</p></li><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-4.7"><span class="ed-ch-num">4.7</span> <span class="ed-row-t">Privacy and AI Regulation</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a> (no photo bytes), <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a> (noindex) and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a> (recording what was inferred) are worked examples of this chapter’s principles. See <a class="ed-x" href="/builders/k1">K.1</a>.</p></li></ul></section>
+<nav class="ed-chnav" aria-label="Chapters on this path"><a class="k-btn k-btn-quiet" href="/curators">The curator’s charter</a><a class="k-btn k-btn-secondary" href="/curators/k3" rel="next">Next: K.3 Money Beside the Introduction</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

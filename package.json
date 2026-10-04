@@ -1,0 +1,12 @@
+{
+  "name": "kindling-manual",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Solo Operator's Field Manual, Kindling edition. Static pages built from four chapters and three tools.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "build/.venv/bin/python build/build.py",
+    "test": "node test/test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

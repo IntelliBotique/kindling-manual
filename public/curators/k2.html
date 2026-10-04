@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K.2 Licensing and Governance · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders">For builders</a><a href="/curators" aria-current="page">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K.2">
+<div class="wrap ed-measure">
+<p class="eyebrow">For curators · Article III · Written for this edition</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K.2</span> Licensing and Governance</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>"No single company can own the standard. That includes us." The protocol site says it. Two documents make it checkable: the license files and GOVERNANCE.md. Both are read here as they stood on October 4, 2026, at commit <code>c3e24cd</code>, for what they permit, what they require and how the specification changes. This is not legal advice.</p>
+<h2 id="k2-two-licenses-split-on-purpose">Two licenses, split on purpose</h2>
+<p>The README gives the split and the reason. "Code: Apache 2.0" and "Spec text: CC BY 4.0." Code is for anyone to "fork, vendor, and embed," and spec text is "reusable in books, articles, derivative specifications, and academic work without a separate negotiation." Every footer on both sites repeats it.</p>
+<p>The repository's <code>LICENSE</code> file is the full Apache 2.0 text, with the copyright line filled in: "Copyright 2026 TranquilTech and Kindling contributors". Apache publishes the same text at https://www.apache.org/licenses/LICENSE-2.0. <code>LICENSE-SPEC</code> reads: "This specification text is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0)." <code>package.json</code> declares <code>"license": "Apache-2.0"</code>. There is no NOTICE file.</p>
+<h2 id="k2-apache-2-0-for-the-code">Apache 2.0, for the code</h2>
+<p>Section 2 of the Apache License grants "a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form." Section 3 adds a patent license. It "shall terminate as of the date such litigation is filed" for anyone who sues claiming the Work infringes a patent.</p>
+<p>Redistribute, and Section 4 sets 4 conditions:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>The license's words</th>
+<th>What it means for you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4(a)</td>
+<td>"You must give any other recipients of the Work or Derivative Works a copy of this License"</td>
+<td>Ship the full Apache text. The repository's <code>LICENSE</code> file is that text, so carry it with your build.</td>
+</tr>
+<tr>
+<td>4(b)</td>
+<td>"You must cause any modified files to carry prominent notices stating that You changed the files"</td>
+<td>Mark the files you changed.</td>
+</tr>
+<tr>
+<td>4(c)</td>
+<td>"You must retain ... all copyright, patent, trademark, and attribution notices from the Source form of the Work"</td>
+<td>Keep "Copyright 2026 TranquilTech and Kindling contributors."</td>
+</tr>
+<tr>
+<td>4(d)</td>
+<td>Applies "If the Work includes a 'NOTICE' text file"</td>
+<td>The repository has none today.</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>You may build a closed client. Section 4 ends: "You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions ... for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License." A proprietary Pool UI that embeds the reference validator is permitted, as long as the 4 conditions hold for the parts you took.</p>
+<p>The name is held back. Section 6: "This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work." Section 7 provides the code "on an 'AS IS' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND." Neither the repository nor either Kindling site mentions a trademark, and neither publishes a trademark policy for the name "Kindling" (checked October 4, 2026). Describe your product as built on Kindling. Do not name it as if it were Kindling.</p>
+<h2 id="k2-cc-by-4-0-for-the-specification-text">CC BY 4.0, for the specification text</h2>
+<p>Section 2(a)(1) of CC BY 4.0 grants "a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to: a. reproduce and Share the Licensed Material, in whole or in part; and b. produce, reproduce, and Share Adapted Material." <code>LICENSE-SPEC</code> adds: "for any purpose, even commercially."</p>
+<p>The conditions are in Section 3(a)(1). When you share it, "including in modified form," you retain "identification of the creator(s)," "a copyright notice," notices referring to the license and the warranty disclaimer, and "a URI or hyperlink to the Licensed Material to the extent reasonably practicable." You must also "indicate if You modified the Licensed Material" and link or include the license. Section 3(a)(2) lets you do this "in any reasonable manner based on the medium, means, and context."</p>
+<p>Section 2(b)(2) holds the rest back: "Patent and trademark rights are not licensed under this Public License."</p>
+<p>So whoever quotes the specification, in a manual, a client's help pages or a charter, names the source ("Kindling Protocol Specification v0.1.1, Copyright (c) 2026 TranquilTech and Kindling spec contributors"), links the spec and the license, and says when the wording changed.</p>
+<p>One gap. The README assigns "Code" to Apache 2.0 and "Spec text" to CC BY 4.0. The 6 JSON Schema files are normative (Appendix A of the spec) and also machine-readable code, and no file says which license governs them. The package as a whole declares Apache-2.0. Until the project says otherwise, meet both sets of conditions when you copy a schema.</p>
+<h2 id="k2-who-decides-today">Who decides today</h2>
+<p>GOVERNANCE.md names 5 roles, the fifth being a Working Group that does not exist until v1.0, and hands conduct to a committee. Their state on October 4, 2026:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>What it may do (GOVERNANCE.md)</th>
+<th>Who holds it (MAINTAINERS.md)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial Maintainer</td>
+<td>"commit rights to the spec, the schemas, the reference tooling, and the public registry"</td>
+<td>TranquilTech; one named person, Josh Wolf, listed as project lead</td>
+</tr>
+<tr>
+<td>Spec Reviewers</td>
+<td>Accept RFCs by the two-thirds rule</td>
+<td>None: "No Spec Reviewers are named in this file yet."</td>
+</tr>
+<tr>
+<td>Implementer Liaisons</td>
+<td>"can vote on RFCs and propose spec changes"</td>
+<td>"No Implementer Liaisons named yet."</td>
+</tr>
+<tr>
+<td>Contributors</td>
+<td>"Contributors do not need permission to participate."</td>
+<td>Anyone</td>
+</tr>
+<tr>
+<td>Code of Conduct Committee</td>
+<td>Enforcement, "independently of the maintainers"</td>
+<td>None named in MAINTAINERS.md, and placeholder rows in CODE_OF_CONDUCT.md, though GOVERNANCE.md says "The first committee was named at the v0.1 launch"</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>Remember the third principle: "Single-vendor capture is the failure mode to avoid." Every choice is tested by "does this make the protocol more or less ownable by any one entity?" and "The answer should always be 'less.'"</p>
+<p>No legal body stands behind any of it. The FAQ: "Is Kindling a foundation? No. This site's address is kindling.foundation, but no foundation or other legal entity exists. TranquilTech publishes Kindling today."</p>
+<h2 id="k2-how-the-specification-changes">How the specification changes</h2>
+<p>By RFC, "modeled on the Rust RFC repository." "RFC pull requests stay open for at least 14 days for substantive changes." Acceptance "requires support from at least two-thirds of active Spec Reviewers," where active means "a reviewer who has reviewed at least one RFC in the prior 90 days." There is a shortcut: "If no objection is raised in the comment period and at least two reviewers have explicitly approved, the RFC is accepted." Breaking changes need "at least one minor-version's notice before removal," as <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s12-3">§12.3</a> also requires.</p>
+<p>Now set the roster beside that process. With no Spec Reviewer named, the body that accepts RFCs had no listed members. The 7 seed RFCs are marked "Accepted (landed in v0.1)" and authored by "TranquilTech (initial maintainer)."</p>
+<h2 id="k2-the-road-to-a-working-group">The road to a Working Group</h2>
+<p>GOVERNANCE.md stages the handover by version:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v0.1 to v0.2</td>
+<td>"The Initial Maintainer holds primary stewardship." "Spec Reviewers gain expanded merge rights for accepted RFCs and editorial fixes."</td>
+</tr>
+<tr>
+<td>v0.2 to v0.3</td>
+<td>The maintainer's sign-off on new reviewers "is dropped."</td>
+</tr>
+<tr>
+<td>v0.3 to v0.5</td>
+<td>The maintainer "steps back from RFC review except where TranquilTech (as the Mycelial implementation maintainer) has a direct stake"; "Working Group elections happen for the first time."</td>
+</tr>
+<tr>
+<td>v0.5 to v1.0</td>
+<td>The Working Group "operates with full authority"; the maintainer runs registry infrastructure "for one year past v1.0."</td>
+</tr>
+<tr>
+<td>At v1.0</td>
+<td>"TranquilTech holds no reserved seat."</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>The seats: "Two implementer seats," "One IndieWeb representative seat," "One Pool curator seat," elected "by registered curators," and "One advisory rotation seat." PR #4, the last commit before the research date, removed a reserved Mycelial seat: "Mycelial can compete for one like any other implementation, and no implementation holds a reserved seat."</p>
+<p>The public texts match that list: the How page, the protocol site's timeline and glossary, <code>docs/FRAMEWORK.md</code> and the TranquilTech page all name the curator seat. Cite GOVERNANCE.md. It is the governing text.</p>
+<p>Money stays out: "The project does not accept payment for spec changes, RFC acceptance, registry placement, or any other governance outcome."</p>
+<h2 id="k2-proposing-a-change-step-by-step">Proposing a change, step by step</h2>
+<p>From CONTRIBUTING.md:</p>
+<ol>
+<li>Decide whether you need an RFC. You do to "change normative behavior," add "a new field, schema, or section," or "deprecate or remove existing functionality." You do not for "Editorial fixes," "Adding examples," or tooling that changes no protocol behavior.</li>
+<li>Fork and branch. For an RFC, "Copy <code>RFCs/0000-template.md</code> to <code>RFCs/0000-your-short-title.md</code>." Fill every section; "Sections you genuinely don't have an answer for can say 'I don't know yet, looking for input.'"</li>
+<li>Run <code>npm test</code>, <code>npm run lint</code> and <code>npm run format</code>. "Every PR has to pass the test suite before merge."</li>
+<li>Sign off every commit with <code>git commit -s</code>, the Developer Certificate of Origin.</li>
+<li>Open the pull request. For an RFC, it stays open at least 14 days.</li>
+<li>Thresholds: editorial, "one maintainer approval"; tooling and examples, "two reviewer approvals"; spec changes, "two-thirds support among active Spec Reviewers."</li>
+</ol>
+<p>A curator's route is lighter. CONTRIBUTING.md invites "Field reports from Pool curators, in any form (a blog post, a talk, a thread, a journal)" and points to GitHub Discussions for "curator coordination." Private questions go to <code>maintainers@kindling.foundation</code>. Conduct reports go only to <code>conduct@kindling.foundation</code>.</p>
+<h2 id="k2-field-exercises">Field exercises</h2>
+<ol>
+<li>List every Kindling file your product redistributes and the notice each needs. <em>Done when</em> each file has its license named, the full Apache text ships with your build, and changed files are marked.</li>
+<li>Write the attribution line you will put under any quoted spec text. <em>Done when</em> it names the creator, the version, the copyright notice, a link to the spec and a link to CC BY 4.0, and says whether you changed the wording.</li>
+<li>Decide whether a change you want needs an RFC, using CONTRIBUTING.md's 2 lists. <em>Done when</em> you can name the list item that decides it.</li>
+<li>Draft an RFC from the template for one real ambiguity you found in <a class="ed-x" href="/builders/k1">K.1</a>'s exercises. <em>Done when</em> every section is filled or says "I don't know yet, looking for input."</li>
+<li>Write down which licensing assumption you are making for the JSON Schemas and why. <em>Done when</em> the note is dated and filed where your next release checklist will find it.</li>
+</ol>
+</div>
+
+<nav class="ed-chnav" aria-label="Chapters on this path"><a class="k-btn k-btn-secondary" href="/curators/k3" rel="prev">Before: K.3 Money Beside the Introduction</a><a class="k-btn k-btn-quiet" href="/curators">The curator’s charter</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

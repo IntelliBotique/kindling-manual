@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en" class="ed-proto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K.1 The Protocol as a Reader Meets It · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders" aria-current="page">For builders</a><a href="/curators">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K.1">
+<div class="wrap ed-measure">
+<p class="eyebrow">For builders · Article I · Written for this edition</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K.1</span> The Protocol as a Reader Meets It</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>Kindling is two open standards and a handshake, written down before anything was built on them. The specification is v0.1.1, an errata release dated 1 October 2026, and its own status line reads "Stable for v0.1." Nothing runs on it at TranquilTech yet. The protocol site says so in a chip: "Nothing yet." Mycelial, the first implementation, is "Opening by invitation. Its Kindling version ships in early 2027." All of this is as of October 4, 2026.</p>
+<p>Each part of the specification asks something of you, and its section number says where. Read the asks here and choose what to build before you clone anything. The protocol site's five-step quick start ("Build on it"), its glossary, its RFC index and its schema pages are not repeated; go there for those. Every section number below is from <code>spec/SPEC.md</code> at commit <code>e4eb787</code> of github.com/IntelliBotique/kindling, and the copy served as protocol.kindling.foundation/spec.md was byte-identical on the research date.</p>
+<h2 id="k1-two-standards-stacked">Two standards, stacked</h2>
+<p><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-2">§1.2</a> names the layers: "Layer 1, Profile standard (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2">§2</a>). A freeform self-hosted page becomes a structured profile" and "Layer 2, Pool standard (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3">§3</a>). A Pool is a manifest of structured profiles with a declared curator, intent, visibility, and consent model." Then: "UIs are implementation-defined. The two layers underneath are the protocol."</p>
+<p>The negative comes next, and every builder should know it. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a> is a list of non-goals that carries no keyword: "Kindling does not define a hosted consumer product, a single canonical UI, a federation transport (v0.1 uses email under the hood for messaging), or a chargeable surface at the connection layer." <a class="ed-x" href="/curators/k3">Chapter K.3</a> takes up that last clause.</p>
+<h2 id="k1-layer-1-any-url-is-a-profile">Layer 1: any URL is a profile</h2>
+<p>You own the page; the protocol reads it. "A Profile is whatever the owner publishes at a URL. There is no required format. The protocol parses what is present." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-1">§2.1</a>)</p>
+<p>A parser meets the page in a fixed order, h-card first. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-2">§2.2</a>: "Parsers <span class="ed-kw ed-kw-must">MUST</span> read h-card fields where present and <span class="ed-kw ed-kw-must-not">MUST NOT</span> infer values that contradict explicit h-card markup." Where markup is missing it may infer, and it must say so. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a> puts that on the implementation: "Implementations <span class="ed-kw ed-kw-must">MUST</span> record which fields were h-card-derived and which were inferred." The record lives in <code>extraction_source</code>, which maps each field to one of 3 values, <code>h-card</code>, <code>inferred</code> or <code>owner-declared</code>, and "A parser <span class="ed-kw ed-kw-must">MUST</span> fill <code>extraction_source</code> whenever it infers any field." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a>)</p>
+<p>Four more rules decide what a parser may keep:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Section</th>
+<th>The spec's words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Photos</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a></td>
+<td>"Photos <span class="ed-kw ed-kw-must">MUST</span> be referenced by URL only. Kindling and Pools <span class="ed-kw ed-kw-must-not">MUST NOT</span> store photo bytes."</td>
+</tr>
+<tr>
+<td>Re-parse</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-6">§2.6</a></td>
+<td>"A Pool <span class="ed-kw ed-kw-must">MUST</span> collapse multiple update pushes within any 24-hour window into a single re-parse."</td>
+</tr>
+<tr>
+<td>Opting out</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a></td>
+<td>"Compliant Pools and crawlers <span class="ed-kw ed-kw-must-not">MUST NOT</span> include such a Profile in any Pool, registry, or discovery surface."</td>
+</tr>
+<tr>
+<td>Recording the opt-out</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a></td>
+<td>"Parsers <span class="ed-kw ed-kw-must">MUST</span> still record the field when they find the directive, so that a Pool can detect it and refuse the submission."</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a> also draws a line a builder can miss: "Noindex is not a privacy setting inside a Pool. Privacy inside a Pool comes from the Pool's <code>visibility</code> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>)."</p>
+<h2 id="k1-layer-2-the-pool-manifest">Layer 2: the Pool manifest</h2>
+<p>A Pool is a file before it is anything else. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-1">§3.1</a>: "A Pool <span class="ed-kw ed-kw-must">MUST</span> be retrievable as a JSON document, either from a public Git repository or from a Pool API endpoint that returns the same shape. The document <span class="ed-kw ed-kw-must">MUST</span> validate against <code>schemas/pool_manifest.schema.json</code>."</p>
+<p>The 9 required fields are <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>'s. The schema adds the constraints in the right-hand column.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it holds (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>)</th>
+<th>What the schema adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>The Pool's name</td>
+<td>At least 1 character</td>
+</tr>
+<tr>
+<td><code>curator</code></td>
+<td>"one or more verified Kindling identities; verification level visible"</td>
+<td>Each carries <code>identity</code> and a <code>verification_level</code> of <code>email</code>, <code>oauth</code> or <code>cryptographic</code></td>
+</tr>
+<tr>
+<td><code>intent_tags</code></td>
+<td>What the Pool is for</td>
+<td>At least 1 tag; free-form</td>
+</tr>
+<tr>
+<td><code>visibility</code></td>
+<td>"one of <code>public</code>, <code>unlisted</code>, <code>invite-only</code>"</td>
+<td>Enum</td>
+</tr>
+<tr>
+<td><code>consent_model</code></td>
+<td>"defaults to <code>universal-opt-in</code>; other values: <code>vouching-required</code>, <code>curator-only-adds</code>"</td>
+<td>Required in the schema, so state it</td>
+</tr>
+<tr>
+<td><code>curator_contact</code></td>
+<td>How an owner reaches the curator</td>
+<td>"about removal, complaints, disputes"</td>
+</tr>
+<tr>
+<td><code>charter</code></td>
+<td>"(free-text description)"</td>
+<td>At least 20 characters; "what the Pool is for and what it isn't"</td>
+</tr>
+<tr>
+<td><code>entries</code></td>
+<td>The profile entries (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>)</td>
+<td>Array</td>
+</tr>
+<tr>
+<td><code>schema_version</code></td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s12-1">§12.1</a></td>
+<td>Must be <code>"0.1"</code></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>Under <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a> each entry "<span class="ed-kw ed-kw-must">MUST</span> contain" 4 fields: <code>profile_url</code>, <code>consent_proof</code> ("reference to the handshake response authorizing inclusion"), <code>verification_level</code> and <code>added_at</code>. Once the page is parsed, an entry "<span class="ed-kw ed-kw-should">SHOULD</span> also contain" <code>parsed_profile</code> and <code>parsed_at</code>. Two closing rules matter: "An entry's <code>verification_level</code> is never <code>unverified</code>" and "An entry <span class="ed-kw ed-kw-must-not">MUST NOT</span> hold a parsed profile with <code>kindling_noindex: true</code> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a>)." The coupling is loose by design. "A Profile <span class="ed-kw ed-kw-may">MAY</span> appear in many Pools. A Pool <span class="ed-kw ed-kw-may">MAY</span> list many Profiles." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-5">§3.5</a>)</p>
+<h2 id="k1-identity-shown-every-time">Identity, shown every time</h2>
+<p>"A Profile owner <span class="ed-kw ed-kw-must">MUST</span> be able to prove they control the URL they published. Verification level <span class="ed-kw ed-kw-must">MUST</span> be visible to Askers." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-1">§4.1</a>)</p>
+<p>Email is the baseline. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-2">§4.2</a>: "The first time a Profile is brought into any Pool, Kindling <span class="ed-kw ed-kw-must">MUST</span> send a verification link to the declared contact email." OAuth is optional (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-3">§4.3</a>). A curator may vouch inside a Pool, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-4">§4.4</a> keeps that identity at home: it "<span class="ed-kw ed-kw-must-not">MUST NOT</span> automatically apply to other Pools." The wire values sit in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a> (<code>email</code>, <code>oauth</code>, <code>curator-vouched</code>, <code>unverified</code>, and <code>cryptographic</code>, "Reserved for v0.2"), beside the rule every interface inherits: "a v1-conforming UI <span class="ed-kw ed-kw-must">MUST</span> render it alongside every Profile."</p>
+<h2 id="k1-the-handshake-and-the-6-message-types">The handshake and the 6 message types</h2>
+<p>Nobody enters a Pool without saying yes. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a> in full: "A Profile <span class="ed-kw ed-kw-must-not">MUST NOT</span> be added to a Pool without the owner's explicit consent. Silent inclusion is forbidden. There is no exception."</p>
+<p><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a> gives 6 steps. A curator submits a URL; the Pool pre-fetches a contact method; the Pool sends a handshake carrying the Pool's name, charter, curator identity, intent tags, visibility, an accept link and a decline link. Since v0.1.1 the links decide nothing by themselves: "Each link <span class="ed-kw ed-kw-must">MUST</span> open a confirmation step that shows the Pool's name, charter, curator and visibility and asks the owner to confirm. Only an explicit action on that step, such as a button that sends a POST request, records a decision. A GET request to either link alone <span class="ed-kw ed-kw-must-not">MUST NOT</span> record a decision." The reason takes one line: "email security scanners open every link in a message." A decline "<span class="ed-kw ed-kw-must">MUST</span> be recorded as declined for that Pool and <span class="ed-kw ed-kw-must-not">MUST NOT</span> be re-submitted by the same Curator without owner permission." Silence expires. The window is the manifest's <code>handshake_window_days</code>, literally a default of 14, and "A request's <code>expires_at</code> <span class="ed-kw ed-kw-must">MUST</span> equal its <code>sent_at</code> plus the window."</p>
+<p>Leaving is faster than joining. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>: "Implementations <span class="ed-kw ed-kw-must">MUST</span> process withdrawal within 60 seconds of receipt." Stricter Pools "<span class="ed-kw ed-kw-may">MAY</span> add pre-handshake steps but <span class="ed-kw ed-kw-must-not">MUST NOT</span> remove the owner's ability to decline or withdraw." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-4">§5.4</a>) Auto-accept stays off until the owner turns it on, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-5">§5.5</a> caps it: "Auto-accept defaults to off. A Profile <span class="ed-kw ed-kw-must-not">MUST NOT</span> have more than five active auto-accept rules. Every auto-accept event <span class="ed-kw ed-kw-must">MUST</span> produce a notification to the owner; silent acceptance is forbidden." It "never applies to an invite-only Pool."</p>
+<p>Messages ride on email. "In v0.1, Kindling messaging is delivered as structured email over standard email infrastructure." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a>) Envelopes "<span class="ed-kw ed-kw-must">MUST</span> validate against <code>schemas/kindling_message.schema.json</code>" and name the Pool in <code>via_pool</code> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-2">§6.2</a>). The 6 types are <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-3">§6.3</a>'s:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it carries</th>
+<th>Bound by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>handshake-request</code></td>
+<td>The ask, with charter and links</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a></td>
+</tr>
+<tr>
+<td><code>handshake-response</code></td>
+<td>The owner's answer</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a></td>
+</tr>
+<tr>
+<td><code>intro</code></td>
+<td>A first message between two people</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td><code>reply</code></td>
+<td>Everything after</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td><code>withdrawal</code></td>
+<td>"an owner leaving a Pool"</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a></td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td>"a protocol notice from a Pool or an implementation, not from a person": dormancy, curator transition, auto-accept</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-3">§9.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-5">§5.5</a></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>Richer transports may come later. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-4">§6.4</a> holds them to one condition: they "<span class="ed-kw ed-kw-must">MUST</span> preserve email as a fallback through v1.x."</p>
+<h2 id="k1-spam-discovery-and-continuity-in-one-pass">Spam, discovery and continuity, in one pass</h2>
+<p>Spam protection comes in 3 layers, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7">§7</a> says "A v1-conforming implementation <span class="ed-kw ed-kw-must">MUST</span> support all three layers." Identity gates first: "Messages from unverified senders <span class="ed-kw ed-kw-must">MUST</span> be quarantined or rejected per the recipient's per-profile preference." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-1">§7.1</a>) The owner's own rules come second, <code>accept_from</code> (<code>anyone</code>, <code>verified</code>, <code>shared-pool</code>, <code>vouched</code>, <code>none</code>; <code>verified</code> is the literal default) and <code>no_cold_messages</code>, and "Implementations <span class="ed-kw ed-kw-must">MUST</span> honor the declared rules." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-2">§7.2</a>) Shared block lists come third. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a>: "The Kindling project <span class="ed-kw ed-kw-must">MUST</span> publish a public block list" and "Implementations <span class="ed-kw ed-kw-must">MUST</span> be able to subscribe to one or more lists and filter accordingly."</p>
+<p>Discovery asks little: "A spec-compliant Pool <span class="ed-kw ed-kw-must">MUST</span> be findable through at least one of these surfaces, and <span class="ed-kw ed-kw-should">SHOULD</span> be findable through the well-known convention (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-3">§8.3</a>)." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-1">§8.1</a>) The public registry "<span class="ed-kw ed-kw-must-not">MUST NOT</span> be the only way a Pool is discoverable" (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-4">§8.4</a>), and anyone may run another (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a>). The well-known file at <code>/.well-known/kindling-pool</code> "<span class="ed-kw ed-kw-must">MUST</span> list, for each discoverable Pool on the domain, its <code>manifest_url</code>, <code>visibility</code> and <code>status</code>" (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-2">§10.2</a>). Crawlers "<span class="ed-kw ed-kw-must">MUST</span> respect <code>Cache-Control</code> headers," "<span class="ed-kw ed-kw-must">MUST</span> back off on 429/5xx responses," and must send a User-Agent naming the software and a contact URL (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-3">§10.3</a>).</p>
+<p>Continuity protects the people in a Pool from its curator's calendar. After 90 days without a curation action, "the Pool <span class="ed-kw ed-kw-must">MUST</span> enter <code>dormant</code> status. Pool members <span class="ed-kw ed-kw-must">MUST</span> see a notice. The well-known file <span class="ed-kw ed-kw-must">MUST</span> reflect dormancy." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>) Active members may elect a new curator by two-thirds of those responding, within 14 days (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-3">§9.3</a>). Failing that, "the Pool <span class="ed-kw ed-kw-must">MUST</span> archive," and it stays readable (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-4">§9.4</a>).</p>
+<p>Every document "<span class="ed-kw ed-kw-must">MUST</span> carry a <code>schema_version</code> field," and the value stays <code>"0.1"</code> through v0.1.x (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s12-1">§12.1</a>). A parser meeting a newer major version "<span class="ed-kw ed-kw-must">MUST</span> refuse to consume the document and <span class="ed-kw ed-kw-must">MUST</span> surface a clear error." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s12-2">§12.2</a>)</p>
+<h2 id="k1-the-10-lines-the-site-leads-with">The 10 lines the site leads with</h2>
+<p>The protocol site says "The character of the protocol is in its MUSTs" and lists 10. Eight rest on a <span class="ed-kw ed-kw-must">MUST</span> in the section cited. Two do not. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a> is a non-goal, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a> describes the transport while the binding <span class="ed-kw ed-kw-must">MUST</span> sits in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-4">§6.4</a>. Know which is which before you quote them.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>The site's line</th>
+<th>Section</th>
+<th>Keyword in the spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>"Silent inclusion is forbidden. There is no exception."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a></td>
+<td><span class="ed-kw ed-kw-must-not">MUST NOT</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>"A decline is remembered."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span>, <span class="ed-kw ed-kw-must-not">MUST NOT</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>"Leaving takes sixty seconds."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span> ("within 60 seconds")</td>
+</tr>
+<tr>
+<td>4</td>
+<td>"Your photos are never copied."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span>, <span class="ed-kw ed-kw-must-not">MUST NOT</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>"Nothing is charged at the connection layer."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a></td>
+<td>None: a stated non-goal</td>
+</tr>
+<tr>
+<td>6</td>
+<td>"Who you're talking to is always shown."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td>"Auto-accept can never be silent."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-5">§5.5</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span>, <span class="ed-kw ed-kw-must-not">MUST NOT</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td>"Say no to strangers if you want to."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-2">§7.2</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span> ("honor the declared rules")</td>
+</tr>
+<tr>
+<td>9</td>
+<td>"A Pool outlives its curator."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9">§9</a></td>
+<td><span class="ed-kw ed-kw-must">MUST</span> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-4">§9.4</a>)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>"Email is the floor."</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a></td>
+<td>No <span class="ed-kw ed-kw-must">MUST</span> in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a> (2 MAYs, on display); the <span class="ed-kw ed-kw-must">MUST</span> is <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-4">§6.4</a></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>The site's own gloss on line 5 is accurate: "That is a stated non-goal, not a pricing decision." Quote <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a> as a non-goal. Do not upgrade it to a <span class="ed-kw ed-kw-must">MUST</span>, and do not soften the 8 that are.</p>
+<h2 id="k1-four-conformance-classes">Four conformance classes</h2>
+<p><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a> defines 4 things you can build that conform. Each binds a different set of sections.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Section</th>
+<th>What it must do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pool host</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-1">§11.1</a></td>
+<td>"Implements <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3">§3</a> (manifest), <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5">§5</a> (handshake), <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9">§9</a> (continuity), and publishes a <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10">§10</a> well-known file."</td>
+</tr>
+<tr>
+<td>Pool UI</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-2">§11.2</a></td>
+<td>"Renders <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a> verification levels alongside every Profile, honors <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7">§7</a> spam-filtering layers, supports <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a> withdrawal, and never performs silent inclusion."</td>
+</tr>
+<tr>
+<td>Parser</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-3">§11.3</a></td>
+<td>"Reads <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-2">§2.2</a> h-card fields preferentially, records extraction provenance, respects <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a> noindex, and stores no photo bytes."</td>
+</tr>
+<tr>
+<td>Messaging client</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-4">§11.4</a></td>
+<td>"Validates envelopes against <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-2">§6.2</a> schema, surfaces verification level, and applies <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-1">§7.1</a> gating."</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<h2 id="k1-from-i-want-to-build-to-the-sections-that-bind-it">From "I want to build" to the sections that bind it</h2>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>I want to build</th>
+<th>Class</th>
+<th>Sections that bind it</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A Pool for a group I already keep</td>
+<td>Pool host</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3">§3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5">§5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9">§9</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10">§10</a>; a reading of <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a> and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-1">§11.1</a>: something must be running to receive withdrawals</td>
+<td><code>pool_manifest</code>, <code>well_known_pool</code></td>
+</tr>
+<tr>
+<td>An app people browse Pools in</td>
+<td>Pool UI</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7">§7</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a></td>
+<td><code>parsed_profile</code></td>
+</tr>
+<tr>
+<td>A reader that turns pages into profiles</td>
+<td>Parser</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-2">§2.2</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a></td>
+<td><code>parsed_profile</code></td>
+</tr>
+<tr>
+<td>An inbox for Kindling messages</td>
+<td>Messaging client</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-2">§6.2</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-5">§4.5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-1">§7.1</a></td>
+<td><code>kindling_message</code>, <code>handshake_message</code></td>
+</tr>
+<tr>
+<td>A registry of Pools I trust</td>
+<td>None in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a></td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-4">§8.4</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-3">§10.3</a></td>
+<td><code>well_known_pool</code></td>
+</tr>
+<tr>
+<td>A block list for my community</td>
+<td>None in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a></td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a></td>
+<td><code>block_list</code></td>
+</tr>
+<tr>
+<td>A question-answering agent over Pools</td>
+<td>None in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a></td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a> (only people who said yes), <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-3">§10.3</a> if it crawls</td>
+<td><code>pool_manifest</code></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>The last three rows are useful and permitted, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a> names no conformance class for any of them. Say "built on Kindling" for them; "Kindling-conformant" belongs to the 4 classes until a later version names more.</p>
+<h2 id="k1-what-ships-and-what-does-not">What ships, and what does not</h2>
+<p>The repository ships the specification, 6 JSON Schema 2020-12 files, 5 Node command-line tools (<code>kindling-validate</code>, <code>kindling-parse</code>, <code>kindling-discover</code>, <code>kindling-handshake</code>, <code>kindling-blocklist</code>), a file-backed Express registry, example manifests and profiles, and a vitest suite. That is the list as of October 4, 2026. On the research date, inside a fresh clone on Node 22, <code>npm test</code> passed 43 of 43 tests and <code>kindling-validate</code> accepted all 5 example documents.</p>
+<p>No SDK ships, and no client library, hosted API or consumer app. The repository calls the last deliberate: "It does not contain a consumer experience. Consumer experiences belong to implementations." The registry's own README lists what v0.1 leaves out: curator authentication ("currently we trust the submitted email"), scheduled re-validation, block-list subscription management, search and analytics. The well-known crawler "is not in v0.1," so "curator self-submission is the only path into the registry." And the <code>registry-data/</code> folder that <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-4">§8.4</a> names as the public registry held only its README on the research date.</p>
+<h2 id="k1-before-you-clone-5-things-the-repository-gets-wrong-today">Before you clone: 5 things the repository gets wrong today</h2>
+<p>Each holds for commit <code>c3e24cd</code> on October 4, 2026, after that day's fixes.</p>
+<ol>
+<li><strong>The quick start works only inside a clone.</strong> <code>npx kindling-validate</code> resolved inside the cloned folder after <code>npm install</code> and returned a 404 from npm everywhere else. Nothing named <code>kindling-validate</code> is published to npm.</li>
+<li><strong>The npm name "kindling" belongs to someone else.</strong> It is an unrelated project ("Project bootstrapping with an emphasis on simplicity," version 1.1.0). <code>npm install kindling</code> will not install this protocol's tools.</li>
+<li><strong>The README is out of date.</strong> It says v0.1 "is in pre-launch review, targeting public release as v0.1.1 in late spring 2026," and points at <code>kindling.tranquiltech.com</code> and <code>registry.kindling.tranquiltech.com</code>. The live sites are kindling.foundation and protocol.kindling.foundation.</li>
+<li><strong>v0.1.1 has no release.</strong> CHANGELOG.md marks its 0.1.1 section "Unreleased," GitHub showed "There aren't any releases here," and the repository has no tags, so the changelog's link to a <code>v0.1.1</code> tag leads nowhere.</li>
+<li><strong>The roster is unfinished.</strong> MAINTAINERS.md names one person, the project lead, and says no Spec Reviewers or Code of Conduct Committee members are named yet. CODE_OF_CONDUCT.md still lists its committee as three placeholder rows. <a class="ed-x" href="/builders/k2">Chapter K.2</a> says what that means for how a change is accepted.</li>
+</ol>
+<h2 id="k1-field-exercises">Field exercises</h2>
+<ol>
+<li>Pick one thing from the build table and write the list of sections that bind it, with the MUSTs quoted. <em>Done when</em> every <span class="ed-kw ed-kw-must">MUST</span> in your list carries its section number and none is paraphrased.</li>
+<li>Clone the repository, run <code>npm install</code> and <code>npm test</code>, then validate one example manifest. <em>Done when</em> you have the test count, the validator's output and the commit hash in one note, dated.</li>
+<li>Write an invented Pool manifest for a group you could plausibly keep, label it invented, and run <code>npx kindling-validate</code> on it inside the clone. <em>Done when</em> it validates and you can explain every warning.</li>
+<li>Read <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a> step 3 aloud and sketch the confirmation page your implementation will show. <em>Done when</em> the sketch shows the Pool's name, charter, curator and visibility, and nothing is recorded until a button sends a POST.</li>
+<li>For each of the 10 lines in the table, find the sentence in <code>spec/SPEC.md</code> it rests on. <em>Done when</em> you can say which 2 do not rest on a <span class="ed-kw ed-kw-must">MUST</span> in the section cited and quote what they rest on instead.</li>
+</ol>
+</div>
+<section class="ed-leans" aria-labelledby="leans-t"><h2 id="leans-t">Where this chapter leans on the Field Manual</h2><p class="ed-small">Field Manual chapters live on solo.joshwolf.net, the Library edition. Volume 1 and Chapter 10.9 are open there; the rest open free with an email. Each link here carries a note for a Kindling reader.</p><ul class="ed-rows"><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-4.7"><span class="ed-ch-num">4.7</span> <span class="ed-row-t">Privacy and AI Regulation</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a> (no photo bytes), <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a> (noindex) and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a> (recording what was inferred) are worked examples of this chapter’s principles. See <a class="ed-x" href="/builders/k1">K.1</a>.</p></li><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-8.5"><span class="ed-ch-num">8.5</span> <span class="ed-row-t">Security and Reliability for a Tiny Company</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> The v0.1.1 confirmation step is a clean case study: “email security scanners open every link in a message” (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a>), so only a button that sends a POST records a decision. See <a class="ed-x" href="/builders/k1">K.1</a>.</p></li><li class="ed-lean"><a class="ed-out" href="https://solo.joshwolf.net/read#ch-7.1"><span class="ed-ch-num">7.1</span> <span class="ed-row-t">Distribution Is the Scarce Asset</span></a><span class="ed-row-m">From the Field Manual, on solo.joshwolf.net</span><p class="ed-lean-note"><span class="eyebrow">For a Kindling reader</span> For builders, the protocol’s distribution story is the registry and the well-known file (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-3">§8.3</a> to <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10">§10</a>). “Send the link and the registry lists it” had no live endpoint on October 4, 2026. See <a class="ed-x" href="/builders/k1">K.1</a>.</p></li></ul></section>
+<nav class="ed-chnav" aria-label="Chapters on this path"><a class="k-btn k-btn-quiet" href="/builders">The builder’s charter</a><a class="k-btn k-btn-secondary" href="/builders/k2" rel="next">Next: K.2 Licensing and Governance</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>
