@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-5.3 Invoicing Memberships, Tickets and Hosting · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders">For builders</a><a href="/curators" aria-current="page">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K-5.3">
+<div class="wrap ed-measure">
+<p class="eyebrow">For curators · Article II, with K.3 · Rewritten from Field Manual Ch 5.3</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K-5.3</span> Invoicing Memberships, Tickets and Hosting</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>"Every day an invoice sits unpaid, you're lending your client money at zero percent." The Field Manual's invoicing chapter applies to a Kindling business almost line for line. <a class="ed-x" href="/curators/k3">K.3</a> says how much: "Kindling changes none of it, as long as no invoice line is for an introduction." It needs one addition, a rule the Field Manual never had to state: nothing in invoicing, dunning or collections ever touches a Pool. Spec references are to v0.1.1, as of October 4, 2026. This is not legal or tax advice.</p>
+<h2 id="k-5-3-the-rule-that-comes-first">The rule that comes first</h2>
+<p>A late payment never removes anyone from a Pool, hides them, moves them down, or changes who can write to them. Payment is never a condition of being listed or introduced (<a class="ed-x" href="/curators/k3">K.3</a>'s third question). The owner of a page is not your debtor. A member who owes you for a day pass or an organization that owes you for hosting is the buyer of the thing beside the Pool. Collect from them as you would for anything else, and leave the Pool alone.</p>
+<h2 id="k-5-3-terms-by-buyer">Terms, by buyer</h2>
+<p>The Field Manual's table, cut to the buyers in the library's shapes:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Due on receipt</td>
+<td>Pay now</td>
+<td>Tickets, day passes, classes, monthly memberships: consumers</td>
+</tr>
+<tr>
+<td>Net 15</td>
+<td>Due 15 days after invoice date</td>
+<td>An organization paying for hosting or a shared desk</td>
+</tr>
+<tr>
+<td>Net 30</td>
+<td>Due 30 days after invoice date</td>
+<td>A larger organization, such as an invented library or college foundation</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>"Consumer contracts carry more rules than business-to-business ones." Most of what the library's invented clubs, gyms and rooms sell goes to consumers. Check the late-fee and auto-renewal rules for your state before you write terms (Volume 13 on solo.joshwolf.net; <a class="ed-x" href="/curators/k-3-6">Chapter K-3.6</a> for renewals).</p>
+<p><strong>Deposits.</strong> For a service sold after an introduction and only on request, such as the invented Hearthhold's help, use the Field Manual's structures. "<strong>50/50:</strong> half at signing, half on delivery." Or "Milestones: 30% at signing, 30% at a defined midpoint deliverable, 40% at completion." For an organization's hosting or desk, a "Retainer paid in advance: a monthly fee billed on the 1st for that month's work" is "The strongest cash position a service business can have." For memberships, "annual prepay with a discount (commonly 10–20% off monthly pricing) pulls a year of cash forward."</p>
+<h2 id="k-5-3-an-invoice-that-gets-paid">An invoice that gets paid</h2>
+<p>The Field Manual's eight lines, with one Kindling check on line 5:</p>
+<ol>
+<li>Your legal business name, address and contact.</li>
+<li>The buyer's legal name and the name of the person who approves payment.</li>
+<li>Invoice number (sequential) and invoice date.</li>
+<li>Purchase order number, if the buyer uses them. Libraries and colleges often do.</li>
+<li>Line items tied to the contract language. Read every line against <a class="ed-x" href="/curators/k3">K.3</a>'s three questions. Hosting, a desk, a membership, a class or a ticket can each be a line. An introduction, a message, a yes or a place in a Pool never can.</li>
+<li>Total, and the due date as a calendar date.</li>
+<li>How to pay: a payment link, ACH details, or both.</li>
+<li>Late-fee terms, if any.</li>
+</ol>
+<p>A curator paid by an organization to keep its Pools will be asked for a Form W-9. Starting with 2026 payments, "businesses that pay you $2,000 or more in a year generally must issue a 1099-NEC." Memberships and tickets paid by card are reported, if at all, on Form 1099-K, whose threshold "went back to more than $20,000 and more than 200 transactions." The Field Manual's last word on it applies to every small Pool business: "All of the income is taxable whether a form arrives or not."</p>
+<h2 id="k-5-3-payment-methods-and-fees">Payment methods and fees</h2>
+<p>The Field Manual's published US rates as of 2026, for the methods a Kindling business is likely to use:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Typical cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stripe, online card</td>
+<td>2.9% + 30¢</td>
+<td>+1.5% international cards, +1% currency conversion</td>
+</tr>
+<tr>
+<td>Stripe ACH Direct Debit</td>
+<td>0.8%, capped at $5</td>
+<td>Settles in days, not instantly; failed debits happen</td>
+</tr>
+<tr>
+<td>Stripe Invoicing add-on</td>
+<td>about 0.4% per paid invoice (starter tier)</td>
+<td>On top of payment fees</td>
+</tr>
+<tr>
+<td>PayPal / Square / QuickBooks Payments</td>
+<td>Roughly 2.6–3.5% + fixed fee for cards</td>
+<td>Rates vary by method and plan</td>
+</tr>
+<tr>
+<td>Bank ACH or wire from client</td>
+<td>$0–$30 per wire, ACH often free</td>
+<td>Cheapest for large invoices</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>On a $12 ticket, the invented Ferry Room's door price, the card fee is a large share of the price. At 2.9% + 30¢ it comes to $0.65, about 5.4%. On an invented $90 hosting invoice to an organization it is $2.91. Price small tickets with the fixed fee in mind, and steer organizations to ACH, which the Field Manual advises for "invoices over about $1,000."</p>
+<p><strong>Card surcharging</strong> "is legal in most states but restricted in some, and the card networks add their own rules (caps, disclosure, registration)." Check state rules in Volume 13 before adding one.</p>
+<h2 id="k-5-3-dunning-without-pressure">Dunning, without pressure</h2>
+<p>For memberships, dunning is mostly "failed-payment recovery: automatic card retries, card-updater services and emails asking the customer to update payment details." Turn it on: "Involuntary churn from expired cards is revenue lost to paperwork."</p>
+<p>Keep the emails to payment. The library's invented gym sends no "we miss you" emails and keeps "No streaks, and no visit counts." A reminder that a card failed is fine. A reminder that implies anything about the member's place in a Pool is not.</p>
+<p>For an organization on net terms, use the Field Manual's sequence:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Action</th>
+<th>Tone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>−3</td>
+<td>Reminder with the invoice number, amount, due date and pay link</td>
+<td>Neutral, helpful</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Due-date notice</td>
+<td>Neutral</td>
+</tr>
+<tr>
+<td>+3</td>
+<td>"Just checking this reached the right person. Anything you need from me to process it?"</td>
+<td>Assume a process problem</td>
+</tr>
+<tr>
+<td>+10</td>
+<td>Direct email to your contact, cc accounts payable, asking for a payment date</td>
+<td>Firm, specific</td>
+</tr>
+<tr>
+<td>+20</td>
+<td>Phone call, then an email recapping the promised date</td>
+<td>Personal</td>
+</tr>
+<tr>
+<td>+30</td>
+<td>Pause the work the contract lets you pause, in writing</td>
+<td>Businesslike</td>
+</tr>
+<tr>
+<td>+45</td>
+<td>Formal demand letter</td>
+<td>Formal</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<h3>What "pause work" means for a host</h3>
+<p>The Field Manual calls stopping work "your strongest lever." A host can pause new work: new Pools, new desk seats, support. It cannot pause what the spec requires of a running Pool. "Implementations MUST process withdrawal within 60 seconds of receipt" (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>), in a paid month or an unpaid one. A dormancy notice still goes to members when 90 days pass without a curation action (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>). Write your suspension clause to say exactly this (<a class="ed-x" href="/curators/k-4-3">Chapter K-4.3</a>). A suspension that would stop anyone leaving cannot go in the contract.</p>
+<h2 id="k-5-3-collections-escalation">Collections escalation</h2>
+<p>When dunning fails, the Field Manual's ladder applies. A <strong>payment plan</strong> comes first: "Getting 100% slowly beats getting 60% after a fight." Then a <strong>demand letter</strong>, then <strong>small claims court</strong>, with limits "commonly from a few thousand to $25,000 (Vol 13)." A <strong>collection agency</strong> comes after that. Consumer debts bring the Fair Debt Collection Practices Act into play for the agency. Last is a <strong>write-off</strong>.</p>
+<p>The decision rule fits a small Pool business exactly: "if the time you'd spend collecting, valued at your hourly rate, exceeds half the balance, go straight to a payment plan or a write-off." For a member who owes for a day pass, that is almost always the answer. Their place in any Pool is unaffected either way.</p>
+<h2 id="k-5-3-field-exercises">Field exercises</h2>
+<ol>
+<li>Write payment terms for one membership and one hosting plan, with due date, late fee and a suspension clause that excludes withdrawals. <em>Done when</em> both templates are saved and the suspension clause names <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>.</li>
+<li>Read every invoice and receipt template you send against <a class="ed-x" href="/curators/k3">K.3</a>'s three questions. <em>Done when</em> no line is for an introduction, a message, a yes or a place in a Pool.</li>
+<li>Turn on failed-payment recovery for memberships and read every email it would send. <em>Done when</em> none says anything about a Pool, a streak or a visit count.</li>
+<li>Calculate your card fees as a share of your smallest price. <em>Done when</em> you know the percentage and have decided whether that price or method should change.</li>
+</ol>
+<hr><p class="ed-provenance">Rewritten for the Kindling edition from <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-5.3">Chapter 5.3</a> of The Solo Operator's Field Manual. The full chapter is on <a class="ed-out" href="https://solo.joshwolf.net/read#ch-5.3">solo.joshwolf.net</a>. © 2026 Josh Wolf, licensed under CC BY 4.0. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+</div>
+<nav class="ed-chnav" aria-label="From this chapter"><a class="k-btn k-btn-secondary" href="/curators/k3">Back to K.3 Money Beside the Introduction</a><a class="k-btn k-btn-quiet" href="/curators">The curator’s charter</a><a class="k-btn k-btn-quiet ed-out" href="https://solo.joshwolf.net/read#ch-5.3">Ch 5.3, the original, on solo.joshwolf.net</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

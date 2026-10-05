@@ -44,7 +44,7 @@ def doors(page, inline, chip):
 <p class="ed-go"><a class="k-btn k-btn-primary" href="/curators">Open the curator’s charter</a></p>
 </li>
 </ul>
-<p class="ed-under">A door is a link. Choosing one stores nothing, and everything behind both doors is open. Where a chapter leans on the Field Manual, it links to the Library edition on solo.joshwolf.net with a note for a Kindling reader beside the link. Both doors end with Chapter 10.4, and <a href="{CARE}">Chapter 10.9, crisis and support,</a> is open to everyone.</p>
+<p class="ed-under">A door is a link. Choosing one stores nothing, and everything behind both doors is open. Where a chapter leans on the Field Manual, the edition carries a Kindling rewrite of that chapter, numbered K- after its source, and the original stays on solo.joshwolf.net. Both doors end with Chapter 10.4, and <a href="{CARE}">Chapter 10.9, crisis and support,</a> is open to everyone.</p>
 </div></section>'''
     page('/index', 'Kindling · The Field Manual edition', body, current='doors',
          desc='The Solo Operator’s Field Manual for two readers of one specification: people building on the Kindling protocol and people keeping Pools on it. Every protocol claim carries its section number.')
@@ -54,7 +54,7 @@ def tools_index(page, inline):
     items = [
         ('/tools/quick-start', 'The quick start', 'Clone, validate a Pool, parse a profile, ask a Pool a question. Verbatim from the protocol site, with the warning it leaves out.', 'For builders'),
         ('/tools/hollis', 'Try it as Hollis', 'The consent handshake as the owner of a page meets it, on kindling.foundation. The pattern every Pool builds to (\u00a75.2).', 'Both doors'),
-        ('/tools/money-lines', 'The Money lines', 'What pays for a Kindling business and what never does, from the library\u2019s invented organizations, with the Field Manual chapter that prices each.', 'For curators'),
+        ('/tools/money-lines', 'The Money lines', 'What pays for a Kindling business and what never does, from the library\u2019s invented organizations, with the chapter that prices each.', 'For curators'),
     ]
     more = [
         ('/tools/manifest', 'The Pool manifest walkthrough', 'Write a manifest one field at a time and see what each field promises (\u00a73.2, \u00a73.3).'),
@@ -131,7 +131,8 @@ def money_lines(page, inline, chip):
     for r in E.MONEY_LINES:
         cats = [r['cat']] + ([r['also']] if r.get('also') else [])
         chapters = sorted({c for k in cats for c in E.MONEY_CATS[k][1]})
-        ch_links = ', '.join(f'<a class="ed-out" href="{E.fm_url(c)}">Ch {c}</a>' for c in chapters)
+        ch_links = ', '.join((f'<a href="/{E.REWRITES[c]["doors"][0]}/{E.rw_slug(c)}">K-{c}</a>' if c in E.REWRITES
+                              else f'<a class="ed-out" href="{E.fm_url(c)}">Ch {c}</a>') for c in chapters)
         if 'thanks' in cats:
             ch_links = (ch_links + '; ' if ch_links else '') + f'thanks: none, see <a href="/curators/k3">K.3</a> and {inline("§1.3")}. Status: Draft (v0.2), {E.RESEARCH_DATE}'
         tag = chip('Real app · Kindling version early 2027') if r.get('real') else chip('Invented')
@@ -141,11 +142,11 @@ def money_lines(page, inline, chip):
                  f'<th scope="row">{esc(r["org"])} {tag}</th><td>{esc(r["kind"])}</td><td>{r["pays"]}</td>{never}'
                  f'<td class="ed-src">{srcs}<br>checked {E.RESEARCH_DATE}</td><td>{ch_links or "None"}</td></tr>')
     cat_btns = ''.join(f'<button type="button" class="fchip" data-cat="{k}" aria-pressed="false">{esc(v[0])}</button>' for k, v in E.MONEY_CATS.items())
-    ch_opts = ''.join(f'<option value="{c}">Ch {c}</option>' for c in sorted({c for v in E.MONEY_CATS.values() for c in v[1]}))
+    ch_opts = ''.join(f'<option value="{c}">{("K-" if c in E.REWRITES else "Ch ") + c}</option>' for c in sorted({c for v in E.MONEY_CATS.values() for c in v[1]}))
     body = f'''<section class="hm-hero"><div class="wrap">
 <p class="eyebrow">Tool · for curators and founders · §1.3</p>
 <h1>What pays, and <em>what never does.</em></h1>
-<p class="hm-sub">The Kindling library’s Money lines in one table, with the Field Manual chapter that prices the thing that pays. It is not a directory of real businesses; none exists yet.</p>
+<p class="hm-sub">The Kindling library’s Money lines in one table, with the chapter that prices the thing that pays. It is not a directory of real businesses; none exists yet.</p>
 </div></section>
 <div class="wrap" data-tool="money">
 <div class="ed-filters" role="group" aria-label="Filter the Money lines">
@@ -156,7 +157,7 @@ def money_lines(page, inline, chip):
 <button type="button" class="k-btn k-btn-quiet" data-clear>Show every row</button>
 </div>
 <div class="ed-table ed-money"><table>
-<thead><tr><th>Organization</th><th>Kind</th><th>What pays</th><th class="ed-never">What never pays</th><th>Source page</th><th>Field Manual chapter</th></tr></thead>
+<thead><tr><th>Organization</th><th>Kind</th><th>What pays</th><th class="ed-never">What never pays</th><th>Source page</th><th>Chapter that prices it</th></tr></thead>
 <tbody>{rows}</tbody></table></div>
 <p class="ed-small" data-empty hidden>No row fits these filters. <button type="button" class="k-btn k-btn-quiet" data-clear>Show every row</button></p>
 </div>

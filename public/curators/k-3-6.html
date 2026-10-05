@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-3.6 Pricing the Thing Beside the Introduction · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders">For builders</a><a href="/curators" aria-current="page">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K-3.6">
+<div class="wrap ed-measure">
+<p class="eyebrow">For curators · Article II, with K.3 · Rewritten from Field Manual Ch 3.6</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K-3.6</span> Pricing the Thing Beside the Introduction</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>The Field Manual opens its pricing chapter with "Price is the fastest lever you have." On Kindling, one thing never gets a price: the introduction. Kindling defines no chargeable surface between two people (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a>, a stated non-goal). <a class="ed-x" href="/curators/k3">K.3</a> sets the rule and its three questions, and its Money lines table shows the shapes the Kindling library offers. What gets priced is the thing beside the introduction: a membership, a day pass, a class, a ticket, a hosting plan, a shared desk, or a service someone asks for after an introduction.</p>
+<p>Run every price in this chapter through <a class="ed-x" href="/curators/k3">K.3</a>'s three questions before you publish it. Every organization named here is invented by the Kindling sites, except Mycelial, which the sites label real. Spec references are to v0.1.1, as of October 4, 2026.</p>
+<h2 id="k-3-6-three-ways-to-set-a-price">Three ways to set a price</h2>
+<p>The Field Manual's three methods all still work on the thing you sell.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>How it works</th>
+<th>Where it fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cost-plus</strong></td>
+<td>Your cost plus a markup</td>
+<td>Ignores what the customer would pay; leaves money on the table when your cost is low, which in software it usually is</td>
+</tr>
+<tr>
+<td><strong>Competitor-based</strong></td>
+<td>Price near the alternatives</td>
+<td>Inherits competitors' mistakes; makes you a commodity by definition</td>
+</tr>
+<tr>
+<td><strong>Value-based</strong></td>
+<td>A share of the measurable value the customer gets</td>
+<td>Requires you to understand the customer's economics; takes real discovery work</td>
+</tr>
+</tbody>
+</table></div>
+<p>"Value sets the ceiling, cost sets the floor, and competitors tell you where buyers' expectations sit." One adjustment, from <a class="ed-x" href="/curators/k3">K.3</a>: "The value you may price is the value of the thing you sell. The introductions a Pool makes possible are why people come, and they are not yours to bill."</p>
+<p>The library publishes one price. The invented Ferry Room, a music room, lists "$12 at the door, $8 before eight." That is a time-of-arrival tier on a ticket, and it passes all three questions. The same page says what stays free: "Nobody pays to be asked, to be found, or to be written to. Not players, not bands."</p>
+<h2 id="k-3-6-value-based-pricing-worked-an-invented-shared-desk">Value-based pricing, worked: an invented shared desk</h2>
+<p>The invented Threshold is, in <a class="ed-x" href="/curators/k3">K.3</a>'s table, "A desk for curators." Its money line: "Organizations that keep many Pools may pay for a shared desk." It describes the buyer as "A library, a festival office or a union hall." Suppose you build a desk like it, and an invented library that keeps 6 Pools asks what it would cost. Start from the library's own work, in its own numbers. Every figure in this table is an assumption for the example.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Value driver (invented example)</th>
+<th>Library's current cost (assumption)</th>
+<th>Evidence to collect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Staff time answering removals and complaints at <code>curator_contact</code></td>
+<td>4 hrs/month × $30/hr loaded cost = $120</td>
+<td>The library's own count of messages</td>
+</tr>
+<tr>
+<td>Staff time on handshake review and manifest edits across 6 Pools</td>
+<td>6 hrs/month × $30/hr = $180</td>
+<td>Time logs for one month</td>
+</tr>
+<tr>
+<td>A Pool going dormant after 90 days without a curation action (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>)</td>
+<td>Hard to quantify; members "MUST see a notice"</td>
+<td>The library's own account of what that would cost it</td>
+</tr>
+<tr>
+<td><strong>Quantified monthly value</strong></td>
+<td><strong>$300</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>At $90 a month, the desk takes 30% of the quantified value and the library keeps $210 of it. The Field Manual's caution applies: "The less proof you have, the smaller the share you can claim." Use their time logs, not your estimate.</p>
+<p>Now run the three questions on the $90. Nobody pays more or earns more while two people have not yet met: the price is per organization. Paying changes nothing about who is shown or in what order: the desk works on the curators' side of the Pool. Payment is no condition of being listed: the library's members never see the desk. Three noes. Threshold's own page draws the same lines: "it buys nothing inside a Pool," "curators are never paid per introduction," and the desk is "Free for volunteer curators."</p>
+<h3>Asking about willingness to pay</h3>
+<p>The Field Manual's advice holds: have the willingness-to-pay conversation before you build. It cites Madhavan Ramanujam and Georg Tacke's <em>Monetizing Innovation</em> (2016) and the Van Westendorp method's four questions, asked about a clearly described product:</p>
+<ol>
+<li>At what price would this be so expensive you wouldn't consider it?</li>
+<li>At what price would it be expensive, but you'd still consider it?</li>
+<li>At what price would it be a bargain?</li>
+<li>At what price would it be so cheap you'd doubt the quality?</li>
+</ol>
+<p>Ask them about the membership, the class or the desk. Never ask them about introductions, because introductions have no price to find. "Behavior is still the strongest signal." A library that signs a three-month pilot at $90 tells you more than five that say it sounds fair.</p>
+<h2 id="k-3-6-what-you-charge-for">What you charge for</h2>
+<p>The library's shapes reduce the Field Manual's structure table to the units that sit beside an introduction. Usage pricing for a host's own costs has its own chapter, <a class="ed-x" href="/curators/k-3-7">K-3.7</a>.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Unit</th>
+<th>Pays for</th>
+<th>Library shape (invented)</th>
+<th>Stops where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Membership or day pass</strong></td>
+<td>Access to a place or a program</td>
+<td>Drip Line: "Memberships and day passes pay for the gym."</td>
+<td>It never buys a place in a Pool or a better position in one</td>
+</tr>
+<tr>
+<td><strong>Per unit</strong></td>
+<td>One ticket, one class, one evening</td>
+<td>Ferry Room's door; Correo Lento's paid language classes</td>
+<td>You never need one to join a Pool (Correo Lento: "you never need a class to join a Pool")</td>
+</tr>
+<tr>
+<td><strong>Tier by Pools hosted</strong></td>
+<td>Hosting or a desk, by size</td>
+<td>Threshold's shared desk; Mycelial (real): "Communities that want hosting pay for it"</td>
+<td>It buys nothing a member sees inside a Pool</td>
+</tr>
+<tr>
+<td><strong>Chosen amount, once a year</strong></td>
+<td>Support for the whole thing</td>
+<td>Heartwood: "people chip in what they like, once a year"; Familiar Faces: "each a yearly amount it chooses, which buys no placement"</td>
+<td>"every feature is the same for everyone"</td>
+</tr>
+</tbody>
+</table></div>
+<p>Outcome pricing, priced per introduction or per relationship, is the unit the protocol leaves out. <a class="ed-x" href="/curators/k-3-7">K-3.7</a> lists every form of it that is closed.</p>
+<h2 id="k-3-6-tiering-good-better-best">Tiering: good, better, best</h2>
+<p>The Field Manual's tiering rules carry over to hosting and memberships:</p>
+<ol>
+<li><strong>Tier on value drivers,</strong> such as Pools hosted, curators on the desk and the support you give, rather than arbitrary feature gates.</li>
+<li><strong>Make the middle tier the one you want most buyers on.</strong> Design it first.</li>
+<li><strong>Put one thing in the top tier that large organizations need and small ones don't.</strong> For a desk, that is handovers between curators and notes kept across a season.</li>
+<li><strong>Keep the bottom tier profitable,</strong> or account for it honestly. "A cheap tier that loses money on every customer is a marketing expense, and you should account for it that way." A free tier for volunteer curators, as Threshold offers, is that expense, chosen on purpose.</li>
+<li><strong>Show prices publicly.</strong> Threshold: "We tell them what it costs before they ask."</li>
+</ol>
+<p>Tiers stop at the edge of the Pool. <a class="ed-x" href="/curators/k3">K.3</a> states the test with Card Catalog's line, "Every field, every drawer and every feature is the same for everyone," and the consequence: "A tier that opens who said yes, or a ranking, is a paywall by another name."</p>
+<h2 id="k-3-6-memberships-without-pressure">Memberships without pressure</h2>
+<p>The library's gym shows what a membership on Kindling leaves out. Drip Line: "No streaks, and no visit counts. We do not count how often you come, and nothing is lost if you miss a month." It sends no "we miss you" emails. The Why page explains the logic: "When you can leave without losing anyone, streaks, paywalled likes and fake urgency lose their leverage." Price the membership on what the gym gives, and keep retention honest. A member whose withdrawal any Pool must process within 60 seconds (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>) is someone you keep by being worth paying.</p>
+<h2 id="k-3-6-discounts">Discounts</h2>
+<p>The Field Manual's rule stands: "never give a discount without getting something back." A sample policy for a membership or a desk:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Discount</th>
+<th>Allowed?</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Annual prepay</td>
+<td>Yes</td>
+<td>Paid up front; improves your cash flow</td>
+</tr>
+<tr>
+<td>Nonprofit or education</td>
+<td>Yes, fixed percentage</td>
+<td>Published, applies to everyone who qualifies</td>
+</tr>
+<tr>
+<td>Early pilot</td>
+<td>Yes, time-limited</td>
+<td>In exchange for feedback sessions and a written end date</td>
+</tr>
+<tr>
+<td>"End of month" pressure discount</td>
+<td>No</td>
+<td>Trains buyers to wait</td>
+</tr>
+<tr>
+<td>Anything tied to placement, order or visibility in a Pool</td>
+<td>Never</td>
+<td><a class="ed-x" href="/curators/k3">K.3</a>'s second question</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>Tie every time-limited discount to a date. In the Field Manual's words, a discount with no end date "is your new price."</p>
+<h2 id="k-3-6-raising-prices">Raising prices</h2>
+<p>On new buyers, the Field Manual's test holds: change the price, watch for four to six weeks, and read the result. On existing members:</p>
+<ol>
+<li><strong>Decide on grandfathering:</strong> forever, for a fixed period (commonly six to twelve months), or everyone on a date.</li>
+<li><strong>Give real notice:</strong> at least 30 days, and more for annual plans. Check your own terms, which may require a specific notice period.</li>
+<li><strong>Explain what changed,</strong> plainly.</li>
+<li><strong>Offer a price lock</strong> on the thing sold: "Switch to annual before [date] and keep your current rate for a year." The Field Manual calls this "Offer a lock-in." On Kindling it is a lock on a price and never on a Pool.</li>
+<li><strong>Talk to your largest buyers personally</strong> before the notice goes out.</li>
+</ol>
+<p>An invented notice, for illustration only:</p>
+<blockquote>
+<p>Subject: Membership price change on [date]</p>
+<p>On [date], the monthly membership moves from $[old] to $[new]. Your current rate holds until [date, six months out], or for a full year if you switch to annual billing before [date].</p>
+<p>Nothing about any Pool changes. Your page, your Pools and your place in them stay exactly as they are, whatever you decide.</p>
+</blockquote>
+<h3>Subscription rules to check</h3>
+<p>Memberships renew, so the Field Manual's paragraph applies as written. "At the federal level, the FTC's 2024 'click-to-cancel' amendments to its Negative Option Rule were vacated by the Eighth Circuit in July 2025. The FTC restarted rulemaking in 2026, and it continues to enforce the Restore Online Shoppers' Confidence Act (ROSCA) against confusing subscription practices. Many states have their own automatic-renewal laws with specific disclosure and cancellation requirements." The status is moving; verify it before you design your checkout. This is not legal advice; for subscription terms, a short consult with a lawyer is cheap insurance.</p>
+<h2 id="k-3-6-pricing-a-service-someone-asks-for">Pricing a service someone asks for</h2>
+<p>Some library shapes sell a service after an introduction. Hearthhold: "We charge only for help after two people decide to build something together, and only if they ask." The invented matchmakers at Late Supper cook private dinners, which "pays for Late Supper." <a class="ed-x" href="/curators/k3">K.3</a> sets the limit: such a service "is sold after the introduction and only on request, and it is never tied to the next one." What happens between the two people stays theirs. Ferry Room: "If a band asks what a sub costs, the answer is between the band and the player."</p>
+<p>Price the service with the Field Manual's structures, minus the one that pays on results:</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Structure</th>
+<th>How it works</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hourly</strong></td>
+<td>Paid per hour worked</td>
+<td>Unclear scope, advisory calls</td>
+</tr>
+<tr>
+<td><strong>Fixed project</strong></td>
+<td>One price for a defined deliverable</td>
+<td>Repeatable work with clear scope</td>
+</tr>
+<tr>
+<td><strong>Productized</strong></td>
+<td>Fixed price, fixed scope, fixed process, published</td>
+<td>Work you've done enough times to standardize</td>
+</tr>
+<tr>
+<td><strong>Retainer</strong></td>
+<td>Monthly fee for ongoing access or a defined monthly scope</td>
+<td>Ongoing help, on request</td>
+</tr>
+</tbody>
+</table></div>
+<p>Then set it the Field Manual's way:</p>
+<ol>
+<li><strong>Find your floor.</strong> Target income plus overhead plus taxes (Vol 5), divided by realistic billable hours. Plan on perhaps half to two-thirds of working time being billable.</li>
+<li><strong>Find the value</strong> of the help to the people asking for it.</li>
+<li><strong>Check the market</strong> as a reference point. It isn't a ceiling.</li>
+<li><strong>Price the offer, not the hour.</strong> Package the work into named offers with fixed prices.</li>
+</ol>
+<h2 id="k-3-6-field-exercises">Field exercises</h2>
+<ol>
+<li>Write out every line of your price list and run <a class="ed-x" href="/curators/k3">K.3</a>'s three questions on each. <em>Done when</em> every line passes with three noes, or the lines that failed are gone.</li>
+<li>Build a value table for one membership, class or hosting plan, using the buyer's own numbers. <em>Done when</em> you have a quantified monthly value and know what share your price captures.</li>
+<li>Ask the four Van Westendorp questions in your next three conversations about the thing you sell. <em>Done when</em> you have three sets of answers and a note on where "expensive but I'd consider it" lands.</li>
+<li>Write your discount policy as a table that includes the no-placement row. <em>Done when</em> every allowed discount names what you get back and none touches a Pool.</li>
+<li>Put a price-review date on your calendar within the next six months. <em>Done when</em> the event exists with this chapter linked in it.</li>
+</ol>
+<hr><p class="ed-provenance">Rewritten for the Kindling edition from <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-3.6">Chapter 3.6</a> of The Solo Operator's Field Manual. The full chapter is on <a class="ed-out" href="https://solo.joshwolf.net/read#ch-3.6">solo.joshwolf.net</a>. © 2026 Josh Wolf, licensed under CC BY 4.0. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+</div>
+<nav class="ed-chnav" aria-label="From this chapter"><a class="k-btn k-btn-secondary" href="/curators/k3">Back to K.3 Money Beside the Introduction</a><a class="k-btn k-btn-quiet" href="/curators">The curator’s charter</a><a class="k-btn k-btn-quiet ed-out" href="https://solo.joshwolf.net/read#ch-3.6">Ch 3.6, the original, on solo.joshwolf.net</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

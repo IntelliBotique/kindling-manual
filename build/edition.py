@@ -23,6 +23,25 @@ K_CHAPTERS = {
     'K.4': {'file': 'K4.md', 'slug': 'k4', 'doors': ['curators']},
 }
 
+# The ten Kindling rewrites of Field Manual chapters, gated by the Field Manual lane on October 4, 2026
+# (content/kindling/rewrites/, content/brief/rewrites_gate/). Each keeps its source number with a K- prefix.
+# 'doors' and 'parent' follow content/brief/rewrites_gate/xrefs.md: the K chapter each rewrite is listed with.
+REWRITES = {
+    '3.5': {'file': 'K-3.5.md', 'doors': ['builders'], 'parent': {'builders': None}},
+    '3.6': {'file': 'K-3.6.md', 'doors': ['curators'], 'parent': {'curators': 'K.3'}},
+    '3.7': {'file': 'K-3.7.md', 'doors': ['curators'], 'parent': {'curators': 'K.3'}},
+    '4.3': {'file': 'K-4.3.md', 'doors': ['curators'], 'parent': {'curators': 'K.4'}},
+    '4.7': {'file': 'K-4.7.md', 'doors': ['builders', 'curators'], 'parent': {'builders': 'K.1', 'curators': 'K.4'}},
+    '4.8': {'file': 'K-4.8.md', 'doors': ['curators'], 'parent': {'curators': 'K.4'}},
+    '5.3': {'file': 'K-5.3.md', 'doors': ['curators'], 'parent': {'curators': 'K.3'}},
+    '6.3': {'file': 'K-6.3.md', 'doors': ['curators'], 'parent': {'curators': 'K.3'}},
+    '7.1': {'file': 'K-7.1.md', 'doors': ['builders'], 'parent': {'builders': 'K.1'}},
+    '8.5': {'file': 'K-8.5.md', 'doors': ['builders'], 'parent': {'builders': 'K.1'}},
+}
+
+def rw_slug(cid):
+    return 'k-' + cid.replace('.', '-')
+
 TOOLS = {
     'quick-start': {'title': 'The quick start', 'url': '/tools/quick-start'},
     'hollis': {'title': 'Try it as Hollis', 'url': '/tools/hollis'},
@@ -99,8 +118,9 @@ DOORS = {
     },
 }
 
-LIBRARY_LINE = ('Field Manual chapters live on solo.joshwolf.net, the Library edition. Volume 1 and Chapter 10.9 are open there; '
-                'the rest open free with an email. Each link here carries a note for a Kindling reader.')
+LIBRARY_LINE = ('Ten of the Field Manual chapters these lean on are rewritten in this edition for a Kindling reader, each keeping '
+                'its source number with a K- prefix. The originals, and every other Field Manual chapter, live on solo.joshwolf.net, the Library edition: '
+                'Volume 1 and Chapter 10.9 are open there; the rest open free with an email.')
 
 # Tool 1, builder step 2: conformance class to the sections that bind it, MUSTs quoted from K.1.
 BUILDER_CHOICES = [

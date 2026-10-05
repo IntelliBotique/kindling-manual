@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" class="ed-proto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-7.1 Being Found: The Registry and the Well-Known File · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders" aria-current="page">For builders</a><a href="/curators">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K-7.1">
+<div class="wrap ed-measure">
+<p class="eyebrow">For builders · Article I, with K.1 · Rewritten from Field Manual Ch 7.1</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K-7.1</span> Being Found: The Registry and the Well-Known File</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>"Building got cheap. Getting noticed did not." The Field Manual's opening line is truer for a Kindling builder than for most. The repository ships a validator, a parser, a reference handshake server and a reference registry server. A working client is weeks of work, and so is the next one. What a builder cannot generate is a reason for curators to point their members at it.</p>
+<p>The spec tells you how Pools are found, and therefore how the things that read them get found too. Spec references are to v0.1.1, as of October 4, 2026.</p>
+<h2 id="k-7-1-why-builders-under-invest-in-it">Why builders under-invest in it</h2>
+<p>The Field Manual's causes apply without changes:</p>
+<ul>
+<li>"Building feels like progress and selling feels like rejection." A parser either passes the tests or it doesn't. A curator who never answers gives no feedback at all.</li>
+<li>"Distribution work compounds slowly."</li>
+<li>"AI makes the imbalance worse. When a feature takes an afternoon, the temptation is to ship another feature."</li>
+</ul>
+<p>So does its rule, from Weinberg and Mares's <em>Traction</em>: "spend about half your time on getting traction and half on product, starting before launch."</p>
+<h2 id="k-7-1-the-surfaces-the-spec-defines">The surfaces the spec defines</h2>
+<p>A Pool is a file, and <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8">§8</a> says how the file is found. "A spec-compliant Pool <span class="ed-kw ed-kw-must">MUST</span> be findable through at least one of these surfaces, and <span class="ed-kw ed-kw-should">SHOULD</span> be findable through the well-known convention (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-3">§8.3</a>)." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-1">§8.1</a>)</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Section</th>
+<th>What it says</th>
+<th>Status, October 4, 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sharing the link</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-2">§8.2</a></td>
+<td>"Pool URLs travel through Reddit, Twitter, newsletters, group chats, and word of mouth."</td>
+<td>Works today</td>
+</tr>
+<tr>
+<td>The well-known file</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-3">§8.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10">§10</a></td>
+<td>Any domain hosting a Pool "<span class="ed-kw ed-kw-should">SHOULD</span> publish a <code>.well-known/kindling-pool</code> document," and "Crawlers and registries <span class="ed-kw ed-kw-must">MUST</span> be able to consume this file without prior authorization."</td>
+<td>Works today, wherever a host publishes one</td>
+</tr>
+<tr>
+<td>The project's public registry</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-4">§8.4</a></td>
+<td>"Listing is by curator self-submission." It "<span class="ed-kw ed-kw-must-not">MUST NOT</span> be the only way a Pool is discoverable."</td>
+<td>Planned: the <code>registry-data/</code> folder held only its README (<a class="ed-x" href="/builders/k1">K.1</a>)</td>
+</tr>
+<tr>
+<td>Anyone's registry</td>
+<td><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a></td>
+<td>"Anyone <span class="ed-kw ed-kw-may">MAY</span> run a registry of Pools they curate or trust."</td>
+<td>Open to you</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>The protocol site states the builder's half of the story: "Build a Kindling client in your stack. A list, a search view, a printed zine. Send the link and the registry lists it." The last sentence describes a registry endpoint that did not exist on October 4, 2026. Plan around the surfaces that work.</p>
+<h2 id="k-7-1-what-the-well-known-file-gives-a-builder">What the well-known file gives a builder</h2>
+<p>The well-known file is the most useful thing in <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8">§8</a> for anyone writing a client. "It <span class="ed-kw ed-kw-must">MUST</span> list, for each discoverable Pool on the domain, its <code>manifest_url</code>, <code>visibility</code> and <code>status</code> (<code>active</code>, <code>dormant</code>, <code>archived</code>)." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-2">§10.2</a>) A client that reads well-known files can find every Pool a host lists as discoverable without anyone submitting anything, and can see which are dormant.</p>
+<p>Read it politely. "Crawlers and registries <span class="ed-kw ed-kw-must">MUST</span> respect <code>Cache-Control</code> headers on the well-known file, <span class="ed-kw ed-kw-must">MUST</span> back off on 429/5xx responses, and <span class="ed-kw ed-kw-must">MUST</span> identify themselves via a <code>User-Agent</code> that identifies both the software and a contact URL." (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-3">§10.3</a>) A crawler that ignores those rules gets blocked, and a blocked client has no distribution at all.</p>
+<p>Some Pools are left out of it. The registry view on the protocol site says so: "Unlisted and invite-only Pools do not appear here." "Their addresses travel by hand." A client that can open a Pool from a pasted URL reaches those Pools too.</p>
+<h2 id="k-7-1-what-compounds">What compounds</h2>
+<p>The Field Manual's fourth filter: "Some channels rent attention and some build an asset." On Kindling three things build an asset for a builder:</p>
+<ul>
+<li><strong>Being one of the doors.</strong> Each invented library site carries an "Open in" row naming the apps that can read its Pools. The Why page calls this "One room, many doors": "The same Pool can be read as a list, a map, a zine, an email digest or by an agent." A curator adds your client to that row because it treats their members well. That listing stays as long as you keep earning it.</li>
+<li><strong>A registry you run.</strong> <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a> makes third-party registries "first-class." A registry of the Pools your client serves best is useful to curators and points straight at you. The spec calls "a Pool's inclusion in or exclusion from any registry" a "curator decision," so list only Pools whose curators asked.</li>
+<li><strong>A record of conformance.</strong> Show, section by section, which <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11">§11</a> class your client meets. <a class="ed-x" href="/builders/k1">K.1</a> maps each class to the sections that bind it. A curator choosing which door to recommend can check that in an afternoon.</li>
+</ul>
+<h2 id="k-7-1-worked-example-hollis-grant-s-client">Worked example: Hollis Grant's client</h2>
+<p>Hollis Grant is invented. The kindling.foundation handshake page describes him: "He builds a Kindling client for rural libraries." Consider how a client like his would be found.</p>
+<ol>
+<li><strong>Read the well-known files of the libraries it serves.</strong> The invented Board at Port Ellery Free Library keeps its Pools on its own domain. A client that reads well-known files finds them on its own (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-3">§8.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-2">§10.2</a>) and shows dormant ones as dormant (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s9-1">§9.1</a>).</li>
+<li><strong>Ask each curator to name it in their "Open in" row.</strong> That is a conversation with a librarian, and it is the main channel. It takes the time the Field Manual says distribution takes: "ten hours on distribution, every week."</li>
+<li><strong>Run a small registry of the rural library Pools whose curators asked to be listed</strong> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-5">§8.5</a>), and publish the client's conformance claims beside it.</li>
+<li><strong>Submit to the project's registry when it opens,</strong> and date the day you check (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s8-4">§8.4</a>).</li>
+</ol>
+<p>Nothing in that sequence buys placement or pays anyone per introduction. Kindling defines no chargeable surface between two people (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s1-3">§1.3</a>, a stated non-goal).</p>
+<p>The Field Manual's nineteen-channel Bullseye and its price-to-channel filter are in the full <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-7.1">Chapter 7.1</a>, on solo.joshwolf.net. The price filter assumes the product has a price. On Kindling the introduction has none, and the thing sold beside it is priced in <a class="ed-x" href="/curators/k-3-6">Chapter K-3.6</a>.</p>
+<h2 id="k-7-1-field-exercises">Field exercises</h2>
+<ol>
+<li>Publish a well-known file for an invented Pool on a domain you control, and validate it inside a clone with <code>kindling-validate</code>. <em>Done when</em> it validates and lists <code>manifest_url</code>, <code>visibility</code> and <code>status</code>.</li>
+<li>Check the project registry's status. <em>Done when</em> you have written down what <code>registry-data/</code> holds and the date you looked.</li>
+<li>List the surfaces where your client can be found, with the section that allows each. <em>Done when</em> every surface has a section number and a status in one word.</li>
+<li>Write the crawler rules of <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s10-3">§10.3</a> into your client's fetch code. <em>Done when</em> a test against a server that returns 429 shows your client backing off, and your User-Agent names your software and a contact URL.</li>
+<li>Block ten hours a week on the calendar for distribution. <em>Done when</em> the recurring blocks exist and the first one has a named curator to write to.</li>
+</ol>
+<hr><p class="ed-provenance">Rewritten for the Kindling edition from <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-7.1">Chapter 7.1</a> of The Solo Operator's Field Manual. The full chapter is on <a class="ed-out" href="https://solo.joshwolf.net/read#ch-7.1">solo.joshwolf.net</a>. © 2026 Josh Wolf, licensed under CC BY 4.0. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+</div>
+<nav class="ed-chnav" aria-label="From this chapter"><a class="k-btn k-btn-secondary" href="/builders/k1">Back to K.1 The Protocol as a Reader Meets It</a><a class="k-btn k-btn-quiet" href="/builders">The builder’s charter</a><a class="k-btn k-btn-quiet ed-out" href="https://solo.joshwolf.net/read#ch-7.1">Ch 7.1, the original, on solo.joshwolf.net</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

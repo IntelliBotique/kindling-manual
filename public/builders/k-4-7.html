@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" class="ed-proto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-4.7 The Personal Data a Pool Holds · Kindling edition</title>
+<meta name="description" content="The Solo Operator’s Field Manual, Kindling edition: for people building on the Kindling protocol and people keeping Pools on it.">
+<meta name="theme-color" content="#16121F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/charter.css">
+<link rel="stylesheet" href="/assets/edition.css">
+<link rel="stylesheet" href="https://unicornfactory.dev/assets/uf-credit.css">
+<script src="/assets/edition.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<div class="xbar"><div class="wrap">
+<b>Kindling</b><span>the Field Manual edition</span>
+<span class="dot" aria-hidden="true">·</span><span>Spec v0.1.1 · Stable</span>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/">The protocol site</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<span class="dot" aria-hidden="true">·</span><a href="https://kindling.foundation/">kindling.foundation</a>
+</div></div>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><path d="M61.20 32.00 L60.53 33.25 L58.90 34.35 L57.23 35.32 L56.42 36.31 L56.84 37.51 L58.08 38.99 L59.23 40.59 L59.44 41.99 L58.38 42.93 L56.47 43.41 L54.57 43.75 L53.48 44.40 L53.46 45.67 L54.12 47.49 L54.65 49.38 L54.37 50.77 L53.05 51.29 L51.09 51.09 L49.19 50.76 L47.94 51.00 L47.49 52.19 L47.49 54.12 L47.34 56.08 L46.60 57.29 L45.19 57.33 L43.41 56.47 L41.74 55.51 L40.48 55.30 L39.65 56.27 L38.99 58.08 L38.18 59.88 L37.07 60.76 L35.73 60.31 L34.35 58.90 L33.11 57.42 L32.00 56.80 L30.89 57.42 L29.65 58.90 L28.27 60.31 L26.93 60.76 L25.82 59.88 L25.01 58.08 L24.35 56.27 L23.52 55.30 L22.26 55.51 L20.59 56.47 L18.81 57.33 L17.40 57.29 L16.66 56.08 L16.51 54.12 L16.51 52.19 L16.06 51.00 L14.81 50.76 L12.91 51.09 L10.95 51.29 L9.63 50.77 L9.35 49.38 L9.88 47.49 L10.54 45.67 L10.52 44.40 L9.43 43.75 L7.53 43.41 L5.62 42.93 L4.56 41.99 L4.77 40.59 L5.92 38.99 L7.16 37.51 L7.58 36.31 L6.77 35.32 L5.10 34.35 L3.47 33.25 L2.80 32.00 L3.47 30.75 L5.10 29.65 L6.77 28.68 L7.58 27.69 L7.16 26.49 L5.92 25.01 L4.77 23.41 L4.56 22.01 L5.62 21.07 L7.53 20.59 L9.43 20.25 L10.52 19.60 L10.54 18.33 L9.88 16.51 L9.35 14.62 L9.63 13.23 L10.95 12.71 L12.91 12.91 L14.81 13.24 L16.06 13.00 L16.51 11.81 L16.51 9.88 L16.66 7.92 L17.40 6.71 L18.81 6.67 L20.59 7.53 L22.26 8.49 L23.52 8.70 L24.35 7.73 L25.01 5.92 L25.82 4.12 L26.93 3.24 L28.27 3.69 L29.65 5.10 L30.89 6.58 L32.00 7.20 L33.11 6.58 L34.35 5.10 L35.73 3.69 L37.07 3.24 L38.18 4.12 L38.99 5.92 L39.65 7.73 L40.48 8.70 L41.74 8.49 L43.41 7.53 L45.19 6.67 L46.60 6.71 L47.34 7.92 L47.49 9.88 L47.49 11.81 L47.94 13.00 L49.19 13.24 L51.09 12.91 L53.05 12.71 L54.37 13.23 L54.65 14.62 L54.12 16.51 L53.46 18.33 L53.48 19.60 L54.57 20.25 L56.47 20.59 L58.38 21.07 L59.44 22.01 L59.23 23.41 L58.08 25.01 L56.84 26.49 L56.42 27.69 L57.23 28.68 L58.90 29.65 L60.53 30.75Z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M25 18v28M25 34l15-16M30.5 29.5 41 46" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="34" r="4.6" fill="currentColor"/></svg><span>Kindling<small>The Solo Operator’s Field Manual</small></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Menu</button>
+<div class="site-menu" id="site-menu">
+<nav class="nav" aria-label="This edition"><a href="/">The two doors</a><a href="/builders" aria-current="page">For builders</a><a href="/curators">For curators</a><a href="/tools">Tools</a><a class="out" href="https://protocol.kindling.foundation/build.html">Build on it</a></nav>
+<div class="tools">
+<div class="tg" role="group" aria-label="Theme"><button type="button" data-theme-set="light" aria-pressed="false">Day</button><button type="button" data-theme-set="dark" aria-pressed="true">Night</button></div>
+<button type="button" class="rl" data-font-set aria-pressed="false">Readable letters</button>
+</div>
+</div>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="ed-chapter" data-chapter="K-4.7">
+<div class="wrap ed-measure">
+<p class="eyebrow">For builders · Article I, with K.1 · Rewritten from Field Manual Ch 4.7</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K-4.7</span> The Personal Data a Pool Holds</h1>
+<p class="chips"><span class="chip">Spec v0.1.1 · Stable</span><span class="chip">Examples invented and labeled</span></p>
+<div class="ed-text">
+<p>The Field Manual's baseline for privacy is "to collect less, say what you do, do what you say, secure what you keep, and know whether you've entered a regulated sector." Kindling starts further along that road than most software. The profile stays on the owner's page. Photos are never copied. Nothing enters a Pool without a yes. A Pool still holds personal data, and so does a parser, a client or a host.</p>
+<p>Spec references are to v0.1.1, as of October 4, 2026. This is not legal advice.</p>
+<h2 id="k-4-7-what-the-spec-already-does-for-you">What the spec already does for you</h2>
+<p>Three sections of the spec are privacy rules in their own right:</p>
+<ul>
+<li><strong><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-5">§2.5</a>, photos.</strong> "Photos <span class="ed-kw ed-kw-must">MUST</span> be referenced by URL only. Kindling and Pools <span class="ed-kw ed-kw-must-not">MUST NOT</span> store photo bytes." The most sensitive file most profiles carry never reaches your storage.</li>
+<li><strong><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-7">§2.7</a>, noindex.</strong> "Compliant Pools and crawlers <span class="ed-kw ed-kw-must-not">MUST NOT</span> include such a Profile in any Pool, registry, or discovery surface," and "Parsers <span class="ed-kw ed-kw-must">MUST</span> still record the field when they find the directive, so that a Pool can detect it and refuse the submission."</li>
+<li><strong><a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a>, what was guessed.</strong> "Implementations <span class="ed-kw ed-kw-must">MUST</span> record which fields were h-card-derived and which were inferred." Your records then show which parts of each person's record came from their own markup and which came from your parser.</li>
+</ul>
+<p>Build to all three before anything else. They are also the sections a parser's conformance claim rests on (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s11-3">§11.3</a>).</p>
+<h2 id="k-4-7-the-data-map-for-a-pool">The data map, for a Pool</h2>
+<p>The Field Manual's privacy program starts with "Data map: what personal data you collect, why, where it lives, which vendors touch it, how long you keep it." <a class="ed-x" href="/curators/k4">K.4</a> lists what a curator holds. Here it is as a map, with the section that puts each item there.</p>
+<div class="ed-table"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Where it lives</th>
+<th>Why the spec puts it there</th>
+<th>When you can let it go</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Profile URL</td>
+<td>Each manifest entry (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>)</td>
+<td>Required: <code>profile_url</code></td>
+<td>When the person withdraws (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-3">§5.3</a>)</td>
+</tr>
+<tr>
+<td>Parsed profile and parse time</td>
+<td>Each entry, as a cached sidecar (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>)</td>
+<td><span class="ed-kw ed-kw-should">SHOULD</span>: <code>parsed_profile</code>, <code>parsed_at</code></td>
+<td>On withdrawal, and on every re-parse (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-6">§2.6</a>)</td>
+</tr>
+<tr>
+<td>Consent proof</td>
+<td>Each entry (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-4">§3.4</a>)</td>
+<td>Required: "reference to the handshake response authorizing inclusion"</td>
+<td>Decide and write it down; it is your evidence of a yes</td>
+</tr>
+<tr>
+<td>Decline records</td>
+<td>Wherever your implementation keeps them (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a>)</td>
+<td>A decline "<span class="ed-kw ed-kw-must">MUST</span> be recorded as declined for that Pool"</td>
+<td>See below</td>
+</tr>
+<tr>
+<td>Email addresses</td>
+<td>Your verification and messaging systems (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s4-2">§4.2</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s6-1">§6.1</a>)</td>
+<td>Verification links and structured email</td>
+<td>When no handshake, message or withdrawal can still need them</td>
+</tr>
+<tr>
+<td>Block-list entries</td>
+<td>The lists you subscribe to (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-3">§3.3</a>, <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s7-3">§7.3</a>)</td>
+<td>"known abusers, identified by Kindling identity"</td>
+<td>When you unsubscribe</td>
+</tr>
+<tr>
+<td>Your own identity and verification level</td>
+<td>The manifest's <code>curator</code> field (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s3-2">§3.2</a>)</td>
+<td>Shown to every owner</td>
+<td>When you hand the Pool on (<a class="ed-x" href="/curators/k-4-3">Chapter K-4.3</a>)</td>
+</tr>
+</tbody>
+</table></div><p class="ed-checked">Figures checked October 2026.</p>
+<p>A parser adds <code>extraction_source</code> (<a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s2-3">§2.3</a>) for every profile it reads. A client that shows Pools adds whatever it logs about the people looking. That last row is where most privacy trouble starts, and the spec says nothing about it.</p>
+<h2 id="k-4-7-decline-records-and-deletion-requests-flag-then-decide">Decline records and deletion requests: flag, then decide</h2>
+<p>Two obligations can meet. <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-2">§5.2</a> requires that a decline "<span class="ed-kw ed-kw-must">MUST</span> be recorded as declined for that Pool and <span class="ed-kw ed-kw-must-not">MUST NOT</span> be re-submitted by the same Curator without owner permission." A person who declined may later ask you to delete everything you hold about them. Delete the record and you lose the means of honoring their no.</p>
+<p>The spec does not resolve this, and the state laws answer it differently. Virginia's says a controller that got personal data "from a source other than the consumer" complies with a deletion request by "retaining a record of the deletion request and the minimum data necessary for the purpose of ensuring the consumer's personal data remains deleted" (Va. Code § 59.1-577). California's right to delete has exceptions, among them "solely internal uses that are reasonably aligned with the expectations of the consumer" (Civil Code § 1798.105(d)(7)), and none of them names a refusal record. Washington's right to delete health data (RCW 19.373.040) lists no exceptions of that kind. Whether a decline record fits a given state's law is a question for counsel in each state you are exposed to. Until you have an answer, keep the smallest record that does the job: the profile URL, the Pool, the date of the decline. Tell the person what you kept and why. Write the procedure down before the first request arrives.</p>
+<h2 id="k-4-7-the-ftc-which-reaches-every-pool">The FTC, which reaches every Pool</h2>
+<p>The Field Manual: "The FTC's Section 5 authority (<a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.6">Ch 4.6</a>) is the federal privacy law that reaches everyone." Its cases establish that "a privacy policy is a promise, and breaking it is deception." On Kindling, the charter is a promise too. <a class="ed-x" href="/curators/k4">K.4</a>'s invented example charter ends with "The list is never sold, shared outside this Pool, or ranked." If your charter says that, your systems must make it true. The Field Manual's further warnings apply to any Pool UI or host: "quietly applying new uses to old data, such as training AI on existing customer data, can be unfair or deceptive," and "sharing health, location or children's data with advertisers without consent draws enforcement."</p>
+<h2 id="k-4-7-sector-laws-narrowed-to-the-kindling-library">Sector laws, narrowed to the Kindling library</h2>
+<p><strong>Children.</strong> COPPA applies if a service is "directed to children under 13," or if you have "actual knowledge" you're collecting personal information from a child under 13. None of the library's Pools is directed to children. The invented Midspan's Pool page is marked "Adults only" and says "Everyone here is 18 or older," and the invented Hearthhold "introduces adults." If yours could reach children, read the COPPA section of the full <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.7">Chapter 4.7</a>, on solo.joshwolf.net, before you open it. Otherwise follow the Field Manual's short rule: "If your product isn't for children, say so in your terms, don't knowingly collect children's data, and delete it when you discover it."</p>
+<p><strong>Health.</strong> The library includes peer-support Pools. The invented Scattered Light is "a peer network" for "Harrow–Vance syndrome, invented for this example," and its page notes "Names are visible only to members." HIPAA "applies to covered entities (health plans, healthcare clearinghouses, and healthcare providers that bill electronically) and their business associates." A curator keeping a peer Pool for people who chose to be found is not on that list as the Field Manual defines it. The Field Manual also notes that consumer health apps fall under the FTC's Health Breach Notification Rule and state laws such as Washington's My Health My Data Act. Washington's law has no size threshold. It reaches "any legal entity" that does business in Washington or targets consumers there and decides how consumer health data is collected or shared, and small businesses must comply too (RCW 19.373.010, .030). Consumer health data is personal information that "identifies the consumer's past, present, or future physical or mental health status." Collecting it takes consent "for a specified purpose," and sharing it takes a second consent, "separate and distinct" from the first (RCW 19.373.030). Connecticut applies its consumer-health-data rules regardless of size, and to nonprofits (Connecticut Attorney General). The FTC rule is narrower: it covers vendors of a "personal health record," an electronic record on one person that "has the technical capacity to draw information from multiple sources and that is managed, shared, and controlled by or primarily for the individual" (16 CFR 318.2). Whether a place in a Pool for one condition is consumer health data, and whether a given Pool UI falls under any of these, is a question for counsel. Until you know, treat every field in such a Pool as sensitive. Never send it to an advertising pixel. Name it in your charter.</p>
+<p><strong>Pixels and session replay,</strong> for anyone building a Pool UI. "Session-replay tools and chat widgets have drawn wiretap suits," and "Health-related sites sharing data through ad pixels have faced HHS and FTC action." The Field Manual's instruction is one line: "Audit every third-party script on your site."</p>
+<p>GLBA, FERPA and the Video Privacy Protection Act reach none of the library's shapes. They are in the full chapter.</p>
+<h2 id="k-4-7-the-state-patchwork">The state patchwork</h2>
+<p>"Most real obligations live at the state level." About twenty states have comprehensive privacy laws. "Most apply above a threshold, commonly 100,000 residents' data (or 25,000 plus revenue from selling data); California's is revenue-based. Texas and Nebraska have no volume threshold, but exempt SBA-defined small businesses except for requiring consent before selling sensitive data."</p>
+<p>A small Pool sits far below the common volume thresholds, but not every law works on volume. Connecticut's, as amended from July 1, 2026, also reaches anyone who controls or processes sensitive data, at any volume; nonprofits are exempt except for consumer health data (Vol 13; Connecticut Attorney General). <a class="ed-x" href="/curators/k3">K.3</a> says "Nobody sells the list," so the selling triggers do not apply. That leaves four things to check against Volume 13 for each state your people are in: California's revenue test, the Texas and Nebraska rules, sensitive-data triggers like Connecticut's, and the definitions of sensitive data. The Field Manual names "health, precise location, biometrics, children's data" as examples. Several definitions also reach what profile pages say about people. Virginia's covers personal data "revealing racial or ethnic origin, religious beliefs, mental or physical health diagnosis, sexual orientation" (Va. Code § 59.1-575). Colorado's and Connecticut's name the same kinds. California's "sensitive personal information" includes "religious or philosophical beliefs" and information "concerning a consumer's health" or "sex life or sexual orientation" (Civil Code § 1798.140(ae)).</p>
+<p><strong>Abroad.</strong> Pools are often open to anyone online. The Field Manual's test for GDPR is whether you "offer goods or services to people in the EU" or "monitor their behavior"; "a website EU visitors can merely reach doesn't trigger it." <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-11.6">Chapter 11.6</a> on solo.joshwolf.net covers the rest.</p>
+<h2 id="k-4-7-ai-over-pools">AI over Pools</h2>
+<p>The reference tools include a discovery agent that asks Pools questions in plain language. Two rules bind any agent you build. It reads only people who said yes: <a class="ed-sec" href="https://protocol.kindling.foundation/spec.html#s5-1">§5.1</a> holds for every entry it sees. And if it calls a model vendor, Pool content leaves your systems. Keep the Field Manual's AI register: "which models see customer data, whether they train on it, and what you've told customers."</p>
+<p>The Field Manual lists chatbot-disclosure laws in several states. It also notes the EU AI Act's transparency duties from August 2, 2026, which include telling people when they are dealing with AI. An agent that answers questions about the people in a Pool should say it is an agent, every time.</p>
+<h2 id="k-4-7-a-privacy-program-sized-for-one-curator">A privacy program sized for one curator</h2>
+<p>The Field Manual's eight steps, applied:</p>
+<ol>
+<li><strong>Data map:</strong> the table above, filled in for your Pool.</li>
+<li><strong>Privacy policy</strong> that agrees with the map and with your charter.</li>
+<li><strong>Vendor agreements</strong> with your email and hosting providers.</li>
+<li><strong>Retention schedule,</strong> with the decline-record decision written in.</li>
+<li><strong>Security basics,</strong> in <a class="ed-x" href="/builders/k-8-5">Chapter K-8.5</a>.</li>
+<li><strong>Rights-request process:</strong> your <code>curator_contact</code> address and a checklist.</li>
+<li><strong>One-page incident plan:</strong> who to call (<a class="ed-x" href="/curators/k-4-8">Chapter K-4.8</a>), and which state breach-notification deadlines apply ("all 50 states have them").</li>
+<li><strong>AI register,</strong> if any model sees Pool data.</li>
+</ol>
+<h2 id="k-4-7-field-exercises">Field exercises</h2>
+<ol>
+<li>Fill in the data map for one invented Pool. <em>Done when</em> every row has a location, a reason by section and a retention decision.</li>
+<li>Write the procedure for a deletion request that meets a decline record. <em>Done when</em> it says what you keep, what you delete, what you tell the person, and which question you have put to counsel.</li>
+<li>Test your parser against an invented profile page that carries the noindex directive and a photo. <em>Done when</em> the submission is refused, the directive is recorded, and no photo bytes exist anywhere in your storage.</li>
+<li>Audit every third-party script on your Pool UI. <em>Done when</em> each one is listed with what it receives, and none receives anything from a peer-support Pool.</li>
+<li>List the states your Pool's people are in and read each one's privacy entry in Volume 13. <em>Done when</em> each state has a yes or no for whether its law reaches you, with the threshold that decided it.</li>
+</ol>
+<hr><p class="ed-provenance">Rewritten for the Kindling edition from <a class="ed-x ed-out" href="https://solo.joshwolf.net/read#ch-4.7">Chapter 4.7</a> of The Solo Operator's Field Manual. The full chapter is on <a class="ed-out" href="https://solo.joshwolf.net/read#ch-4.7">solo.joshwolf.net</a>. © 2026 Josh Wolf, licensed under CC BY 4.0. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+</div>
+<nav class="ed-chnav" aria-label="From this chapter"><a class="k-btn k-btn-secondary" href="/builders/k1">Back to K.1 The Protocol as a Reader Meets It</a><a class="k-btn k-btn-quiet" href="/builders">The builder’s charter</a><a class="k-btn k-btn-quiet ed-out" href="https://solo.joshwolf.net/read#ch-4.7">Ch 4.7, the original, on solo.joshwolf.net</a></nav>
+</div>
+</article>
+</main>
+<footer class="foot"><div class="wrap">
+<p class="foot-note">This edition of The Solo Operator’s Field Manual is for the people building on Kindling and the people keeping Pools on it. Kindling is a real open protocol, published by TranquilTech. Nothing runs on it at TranquilTech yet. Every example here carries a label: invented by the Kindling sites, or invented for this edition.</p>
+<nav class="foot-nav" aria-label="Kindling">
+<a href="https://protocol.kindling.foundation/">The protocol site</a>
+<a href="https://protocol.kindling.foundation/spec.html">The specification</a>
+<a href="https://protocol.kindling.foundation/build.html">Build on it</a>
+<a href="https://kindling.foundation/">kindling.foundation</a>
+<a href="https://kindling.foundation/intro.html">The handshake</a>
+<a href="https://solo.joshwolf.net">The Field Manual, Library edition</a>
+<a href="https://github.com/IntelliBotique/kindling-manual">This edition’s source</a>
+</nav>
+<p class="ed-license">This edition’s text is © 2026 Josh Wolf, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Its code is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. Quotations from the Kindling Protocol Specification v0.1.1: © 2026 TranquilTech and Kindling spec contributors, CC BY 4.0, marked where shortened.</p>
+<p>This site sets no cookies. Day, Night and Readable letters stay in this browser.</p>
+<p class="ed-colophon">Produced and edited by Josh Wolf. Research and writing support by Claude, from Anthropic.</p>
+</div>
+<div class="uf-credit-row"><span class="uf-credit"><span class="uf-dot"></span><a class="uf-k" href="https://unicornfactory.dev/sites/">a lever in</a><a class="uf-wm" href="https://unicornfactory.dev/">The Unicorn Factory</a></span></div>
+</footer>
+<div class="ed-care" role="region" aria-label="Crisis support"><div class="wrap">
+<span>If you are in crisis:</span>
+<a href="tel:988">Call or text 988</a>
+<a href="sms:741741?&amp;body=HOME">Text HOME to 741741</a>
+<a href="https://solo.joshwolf.net/care">Chapter 10.9, crisis and support</a>
+</div></div>
+
+</body>
+</html>

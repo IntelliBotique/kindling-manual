@@ -1,16 +1,18 @@
 # The Solo Operator's Field Manual: the Kindling edition
 
-manual.kindling.foundation. Four chapters and three tools for two readers of one specification: people building on the [Kindling protocol](https://protocol.kindling.foundation/) and people keeping Pools on it. Every protocol claim carries its section number in spec v0.1.1, and every example is labeled invented.
+manual.kindling.foundation. Four chapters, ten Kindling rewrites of Field Manual chapters, and three tools, for two readers of one specification: people building on the [Kindling protocol](https://protocol.kindling.foundation/) and people keeping Pools on it. Every protocol claim carries its section number in spec v0.1.1, and every example is labeled invented.
 
-The edition carries no Field Manual chapters. Where a chapter leans on one, it links to the Library edition at [solo.joshwolf.net](https://solo.joshwolf.net) with a note for a Kindling reader beside the link.
+The edition carries no Field Manual chapter as written. Ten of the chapters K.1 to K.4 lean on are rewritten for a Kindling reader (K-3.5 to K-8.5, each keeping its source number), gated by the Field Manual lane on October 4, 2026. Each rewrite links its original on [solo.joshwolf.net](https://solo.joshwolf.net), the Library edition. Chapters 10.4 and 10.9 are linked there unchanged.
 
 ## Layout
 
 | Path | What it is |
 |---|---|
 | `content/kindling/` | K.1 to K.4, the finished chapters, as the Field Manual lane gated them. Never edited here; problems go to `FIELD_MANUAL_CORRECTIONS.md`. |
+| `content/kindling/rewrites/` | K-3.5 to K-8.5, the ten Kindling rewrites, as gated. Never edited here either. |
+| `content/brief/rewrites_gate/` | The gate's notes, check log and cross-references for the rewrites. |
 | `content/brief/` | The tool specifications and the cross-reference list the chapters and notes are built from. |
-| `build/edition.py` | The wrapper copy: the two charters, the Field Manual notes, the chooser and the Money lines data. |
+| `build/edition.py` | The wrapper copy: the two charters, the rewrite table, the notes for 10.4 and 10.9, the chooser and the Money lines data. |
 | `build/build.py`, `build/pages.py` | The generator. Writes every page into `public/`. |
 | `public/` | The site, served as static files. `assets/charter.css` is kindling-sites' file, unchanged. |
 | `test/test.mjs` | The checks: the care line, licensing, register, section links, quotation fidelity, the tools. |

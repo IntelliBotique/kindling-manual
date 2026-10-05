@@ -32,6 +32,14 @@ for kid, meta in E.K_CHAPTERS.items():
     assert m and m.group(1) == kid, first
     K[kid] = {'title': m.group(2), 'md': rest, **meta}
 
+RW = {}
+for cid, meta in E.REWRITES.items():
+    src = open(os.path.join(ROOT, 'content', 'kindling', 'rewrites', meta['file']), encoding='utf-8').read()
+    first, rest = src.split('\n', 1)
+    m = re.match(r'^## Chapter K-(\d+\.\d+): (.+)$', first)
+    assert m and m.group(1) == cid, first
+    RW[cid] = {'title': m.group(2), 'md': rest, **meta}
+
 ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 PAGES = []
 
@@ -43,13 +51,20 @@ def k_href(kid, door=None):
     d = door if door in doors else doors[0]
     return f'/{d}/{E.K_CHAPTERS[kid]["slug"]}'
 
+def rw_href(cid, door=None):
+    doors = E.REWRITES[cid]['doors']
+    d = door if door in doors else doors[0]
+    return f'/{d}/{E.rw_slug(cid)}'
+
 def heading_id(kid, text):
-    return E.K_CHAPTERS[kid]['slug'] + '-' + re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')[:60]
+    slug = E.K_CHAPTERS[kid]['slug'] if kid in E.K_CHAPTERS else E.rw_slug(kid[2:])
+    return slug + '-' + re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')[:60]
 
 # ---------- text helpers ----------
 SEC_RE = re.compile(r'§(\d+(?:\.\d+)?)')
 CHREF_RE = re.compile(r'\b(Chapter|Ch\.?)\s+(\d+\.\d+)\b')
 KREF_RE = re.compile(r'\b(?:Chapter\s+)?(K\.[1-4])\b')
+KXREF_RE = re.compile(r'\b(?:Chapter\s+)?K-(\d+\.\d+)\b')
 KW_RE = re.compile(r'\b(MUST NOT|MUST|SHOULD NOT|SHOULD|MAY)\b')
 
 def sec_anchor(num):
@@ -72,22 +87,40 @@ def map_text_nodes(h, fn, skip=('a', 'code', 'pre', 'script', 'style')):
 def link_sections(h, skip=('a', 'code', 'pre', 'script', 'style')):
     return map_text_nodes(h, skip=skip, fn=lambda t: SEC_RE.sub(lambda m: f'<a class="ed-sec" href="{sec_anchor(m.group(1))}">§{m.group(1)}</a>', t))
 
-def link_chapters(h, door=None):
-    """Field Manual chapter numbers link to the Library edition; K numbers link within this edition."""
+def link_chapters(h, door=None, self_src=None):
+    """Chapter numbers. A rewritten Field Manual number links to its Kindling rewrite, except inside that rewrite,
+    where it names the original (xrefs.md). Every other Field Manual number links to the Library edition.
+    K.1 to K.4 and K-n.n link within this edition."""
+    def fm(m):
+        cid = m.group(2)
+        if cid in E.REWRITES and cid != self_src:
+            return f'<a class="ed-x" href="{rw_href(cid, door)}">{m.group(0)}</a>'
+        return f'<a class="ed-x ed-out" href="{E.fm_url(cid)}">{m.group(0)}</a>'
+    def kx(m):
+        cid = m.group(1)
+        if cid not in E.REWRITES:
+            return m.group(0)
+        return f'<a class="ed-x" href="{rw_href(cid, door)}">{m.group(0)}</a>'
     def fn(t):
-        t = CHREF_RE.sub(lambda m: f'<a class="ed-x ed-out" href="{E.fm_url(m.group(2))}">{m.group(0)}</a>', t)
+        t = KXREF_RE.sub(kx, t)
+        t = CHREF_RE.sub(fm, t)
         return KREF_RE.sub(lambda m: f'<a class="ed-x" href="{k_href(m.group(1), door)}">{m.group(0)}</a>', t)
     return map_text_nodes(h, fn)
 
 def mark_keywords(h):
     return map_text_nodes(h, lambda t: KW_RE.sub(lambda m: f'<span class="ed-kw ed-kw-{m.group(1).lower().replace(" ", "-")}">{m.group(1)}</span>', t))
 
-TABLE_RE = re.compile(r'<table>.*?</table>', re.S)
+TABLE_RE = re.compile(r'<table>.*?</table>(\s*<p>Figures checked [^<]*</p>)?', re.S)
 
 def stamp_tables(h):
+    """Wrap every table. A table that carries a digit gets a "Figures checked" line, unless its text already
+    carries one (the rewrites do); that line is kept as written and only given the class."""
     def rep(m):
-        t = f'<div class="ed-table">{m.group(0)}</div>'
-        if re.search(r'\d', re.sub(r'<[^>]+>', '', m.group(0))):
+        table = m.group(0)[:m.group(0).index('</table>') + len('</table>')]
+        t = f'<div class="ed-table">{table}</div>'
+        if m.group(1):
+            return t + m.group(1).strip().replace('<p>', '<p class="ed-checked">', 1)
+        if re.search(r'\d', re.sub(r'<[^>]+>', '', table)):
             t += '<p class="ed-checked">Figures checked October 2026.</p>'
         return t
     return TABLE_RE.sub(rep, h)
@@ -184,7 +217,16 @@ def page(path, title, body, *, dress='charter', current=None, desc=None):
     PAGES.append(path)
 
 # ---------- shared pieces ----------
+def rw_row(cid, door=None):
+    return (f'<li class="ed-row ed-rw"><a href="{rw_href(cid, door)}"><span class="ed-ch-num">K-{cid}</span> '
+            f'<span class="ed-row-t">{esc(RW[cid]["title"])}</span></a>'
+            f'<span class="ed-row-m">Rewritten for this edition from Field Manual Ch {cid} · '
+            f'<a class="ed-out" href="{E.fm_url(cid)}">the original</a></span></li>')
+
 def fm_link(cid, door=None):
+    """A Field Manual chapter the edition leans on: its Kindling rewrite where one exists, else the Library link and its note."""
+    if cid in E.REWRITES:
+        return rw_row(cid, door)
     title, note = E.FM[cid]
     return (f'<li class="ed-lean"><a class="ed-out" href="{E.fm_url(cid)}"><span class="ed-ch-num">{cid}</span> '
             f'<span class="ed-row-t">{esc(title)}</span></a>'
@@ -254,6 +296,52 @@ def k_page(kid, door):
 </div>
 </article>'''
     page(f'/{door}/{k["slug"]}', f'{kid} {k["title"]} · Kindling edition', body, dress=d['dress'], current=door)
+
+# ---------- rewrite pages ----------
+def rw_article(cid, door):
+    for i, a in enumerate(E.DOORS[door]['articles'], 1):
+        if cid in a.get('leans', []):
+            return i, a
+    raise KeyError((cid, door))
+
+def rw_page(cid, door):
+    r = RW[cid]
+    d = E.DOORS[door]
+    art, a = rw_article(cid, door)
+    parent = r['parent'].get(door)
+    h = render(r['md'])
+    h = re.sub(r'<h3>(.*?)</h3>', lambda m: f'<h2 id="{heading_id("K-" + cid, re.sub("<[^>]+>", "", m.group(1)))}">{m.group(1)}</h2>', h)
+    h = re.sub(r'<h4>(.*?)</h4>', lambda m: f'<h3>{m.group(1)}</h3>', h)
+    h = stamp_tables(h)
+    h = link_sections(h)
+    h = link_chapters(h, door, self_src=cid)
+    if d['dress'] == 'c1':
+        h = mark_keywords(h)
+    h = h.replace('(verify)', '<span class="ed-verify">(verify)</span>')
+    # the provenance and license line after the rule: the original is reachable from here (xrefs.md, item 1)
+    h, n = re.subn(r'<hr\s*/?>\s*<p>(Rewritten for the Kindling edition.*?)</p>',
+                   lambda m: '<hr><p class="ed-provenance">' + m.group(1).replace(
+                       'The full chapter is on solo.joshwolf.net.',
+                       f'The full chapter is on <a class="ed-out" href="{E.fm_url(cid)}">solo.joshwolf.net</a>.') + '</p>', h, flags=re.S)
+    assert n == 1, f'K-{cid}: provenance line not found'
+    nav = []
+    if parent:
+        nav.append(f'<a class="k-btn k-btn-secondary" href="{k_href(parent, door)}">Back to {parent} {esc(K[parent]["title"])}</a>')
+    nav.append(f'<a class="k-btn k-btn-quiet" href="/{door}">The {"builder" if door == "builders" else "curator"}\u2019s charter</a>')
+    nav.append(f'<a class="k-btn k-btn-quiet ed-out" href="{E.fm_url(cid)}">Ch {cid}, the original, on solo.joshwolf.net</a>')
+    with_k = f', with {parent}' if parent else ''
+    body = f'''<article class="ed-chapter" data-chapter="K-{cid}">
+<div class="wrap ed-measure">
+<p class="eyebrow">{d["short"]} · Article {ROMAN[art - 1]}{with_k} · Rewritten from Field Manual Ch {cid}</p>
+<h1 class="ed-ch-title"><span class="ed-ch-num">K-{cid}</span> {esc(r["title"])}</h1>
+<p class="chips">{chip("Spec " + E.SPEC_VERSION + " · Stable")}{chip("Examples invented and labeled")}</p>
+<div class="ed-text">
+{h}
+</div>
+<nav class="ed-chnav" aria-label="From this chapter">{"".join(nav)}</nav>
+</div>
+</article>'''
+    page(f'/{door}/{E.rw_slug(cid)}', f'K-{cid} {r["title"]} · Kindling edition', body, dress=d['dress'], current=door)
 
 # ---------- charter pages (with Tool 1, the chooser) ----------
 def chooser_builder():
@@ -343,6 +431,9 @@ def main():
     for kid, meta in E.K_CHAPTERS.items():
         for door in meta['doors']:
             k_page(kid, door)
+    for cid, meta in E.REWRITES.items():
+        for door in meta['doors']:
+            rw_page(cid, door)
     import pages
     pages.build(page, inline, chip, k_href, fm_link, K)
     json.dump({'pages': sorted(PAGES)}, open(os.path.join(ROOT, 'build', 'site_manifest.json'), 'w'), indent=1)

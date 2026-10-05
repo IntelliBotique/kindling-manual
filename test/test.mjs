@@ -100,7 +100,7 @@ check('the builder article is named "What the protocol leaves out" and §1.3 is 
     assert(!/Kindling forbids/i.test(t), `${p}: "Kindling forbids"`);
     assert(!/§1\.3 (forbids|bans|prohibits)/.test(t), `${p}: §1.3 as a ban`);
   }
-  assert(text(b).includes('Kindling defines no chargeable surface between two people (§1.3, a stated non-goal).'), 'non-goal wording');
+  assert(text(pages.find(x => x.p === 'builders/k-3-5.html').h).includes('Kindling defines no chargeable surface between two people (§1.3, a stated non-goal).'), 'non-goal wording on K-3.5, where Art. III leads');
 });
 
 // ---- protocol claims carry a section and match the stated version ----
@@ -153,8 +153,8 @@ check('no Field Manual chapter text is in the edition, and every Field Manual li
     }
   }
   const b = pages.find(x => x.p === 'builders.html').h, c = pages.find(x => x.p === 'curators.html').h;
-  for (const id of ['3.5', '4.7', '8.5', '7.1', '10.4', '10.9']) assert(b.includes(`<span class="ed-ch-num">${id}</span>`), `builders: ${id}`);
-  for (const id of ['3.6', '3.7', '4.3', '4.7', '4.8', '5.3', '6.3', '10.4', '10.9']) assert(c.includes(`<span class="ed-ch-num">${id}</span>`), `curators: ${id}`);
+  for (const id of ['K-3.5', 'K-4.7', 'K-8.5', 'K-7.1', '10.4', '10.9']) assert(b.includes(`<span class="ed-ch-num">${id}</span>`), `builders: ${id}`);
+  for (const id of ['K-3.6', 'K-3.7', 'K-4.3', 'K-4.7', 'K-4.8', 'K-5.3', 'K-6.3', '10.4', '10.9']) assert(c.includes(`<span class="ed-ch-num">${id}</span>`), `curators: ${id}`);
 });
 check('the two doors lead to their K chapters and tools in charter order', () => {
   const order = (h) => [...h.matchAll(/<section class="ed-art"[\s\S]*?<\/section>/g)].map(m => (m[0].match(/href="(\/[^"#]+)"/) || [])[1]);
@@ -200,7 +200,7 @@ check('Tool 1: each of the 9 choices names at least one section and at least one
       const panel = h.match(new RegExp(`<div class="ed-panel" data-for="${v}" hidden>([\\s\\S]*?)</ul></div>`));
       assert(panel, `${door}: no panel for ${v}`);
       assert(/§\d/.test(text(panel[1])), `${door}/${v}: no section`);
-      assert(/<span class="ed-ch-num">(K\.\d|\d+\.\d+)<\/span>/.test(panel[0]), `${door}/${v}: no chapter`);
+      assert(/<span class="ed-ch-num">(K\.\d|K-\d+\.\d+|\d+\.\d+)<\/span>/.test(panel[0]), `${door}/${v}: no chapter`);
       n++;
     }
   }
@@ -256,6 +256,61 @@ check('the quick start is the protocol site’s five steps, verbatim, with the c
     for (const l of lines) assert(site.includes(norm(l)), `command not on the site: ${l}`);
   }
   for (const s of ['You need git, Node.js and npm.', 'checks a Kindling document against its schema.', 'Only people who said yes to a Pool are in it to be asked.']) assert(site.includes(s) && t.includes(s), s);
+});
+
+// ---- the ten gated Kindling rewrites (content/kindling/rewrites/, gated October 4, 2026) ----
+const RW = { '3.5': ['builders'], '3.6': ['curators'], '3.7': ['curators'], '4.3': ['curators'], '4.7': ['builders', 'curators'],
+  '4.8': ['curators'], '5.3': ['curators'], '6.3': ['curators'], '7.1': ['builders'], '8.5': ['builders'] };
+const rwSlug = id => 'k-' + id.replace('.', '-');
+check('every rewrite is wired as written: all its numbers and quotations are on its page', () => {
+  for (const [id, doors] of Object.entries(RW)) {
+    const src = fs.readFileSync(path.join(ROOT, `content/kindling/rewrites/K-${id}.md`), 'utf8');
+    const plain = norm(src.replace(/^## Chapter .*$/m, '').replace(/\*+|`/g, '').replace(/^#+ |\|/gm, ' '));
+    for (const d of doors) {
+      const pg = pages.find(x => x.p === `${d}/${rwSlug(id)}.html`);
+      assert(pg, `${d}/${rwSlug(id)} missing`);
+      const t = norm(text(pg.h));
+      for (const n of plain.match(/\d[\d,.]*\d|\d/g)) assert(t.includes(n), `K-${id} (${d}): number ${n} missing`);
+      for (const q of (plain.match(/"[^"]{6,}"/g) || []).filter(q => !/^"\s|\s"$/.test(q))) assert(t.includes(q.replace(/\s+/g, ' ')), `K-${id} (${d}): quotation ${q.slice(0, 60)} missing`);
+    }
+  }
+});
+check('every rewrite page keeps its own license line in the body and links its original on solo.joshwolf.net', () => {
+  for (const [id, doors] of Object.entries(RW)) for (const d of doors) {
+    const h = pages.find(x => x.p === `${d}/${rwSlug(id)}.html`).h;
+    const prov = h.match(/<p class="ed-provenance">([\s\S]*?)<\/p>/);
+    assert(prov, `K-${id} (${d}): no provenance line`);
+    const t = text(prov[1]);
+    assert(t.includes(`Rewritten for the Kindling edition from Chapter ${id}`) && t.includes('© 2026 Josh Wolf, licensed under CC BY 4.0'), `K-${id} (${d}): license line`);
+    assert(prov[1].includes(`href="https://solo.joshwolf.net/read#ch-${id}"`), `K-${id} (${d}): original not linked`);
+  }
+});
+check('exactly one "Figures checked" line under every table that carries a figure, on every page', () => {
+  for (const { p, h } of pages) {
+    for (const m of h.matchAll(/<div class="ed-table"><table>([\s\S]*?)<\/table><\/div>((?:\s*<p class="ed-checked">[^<]*<\/p>)*)/g)) {
+      const lines = (m[2].match(/ed-checked/g) || []).length;
+      if (/\d/.test(text(m[1]))) assert(lines === 1, `${p}: a table with figures has ${lines} "Figures checked" lines`);
+      else assert(lines === 0, `${p}: a table without figures has a "Figures checked" line`);
+    }
+    assert(!/Figures checked[^<]*<\/p>\s*<p[^>]*>Figures checked/.test(h), `${p}: two "Figures checked" lines in a row`);
+  }
+});
+check('the ten rewritten numbers link to their rewrites everywhere; inside a rewrite its own number names the original', () => {
+  const ids = Object.keys(RW);
+  for (const { p, h } of pages) {
+    const self = (p.match(/k-(\d+)-(\d+)\.html$/) || []).slice(1).join('.');
+    for (const m of h.matchAll(/<a class="ed-x( ed-out)?" href="([^"]+)">(?:Chapter|Ch\.?) (\d+\.\d+)<\/a>/g)) {
+      const [, out, href, id] = m;
+      if (ids.includes(id) && id !== self) assert(!out && href.endsWith('/' + rwSlug(id)), `${p}: Ch ${id} links to ${href}`);
+      else assert(out && href.startsWith('https://solo.joshwolf.net/'), `${p}: Ch ${id} should link to the Library, links to ${href}`);
+    }
+    for (const m of h.matchAll(/<li class="ed-lean">([\s\S]*?)<\/li>/g)) {
+      const id = (m[1].match(/<span class="ed-ch-num">([^<]+)<\/span>/) || [])[1];
+      assert(['10.4', '10.9'].includes(id), `${p}: Field Manual ${id} still links out instead of to its rewrite`);
+    }
+  }
+  const money = pages.find(x => x.p === 'tools/money-lines.html').h;
+  for (const id of ['3.6', '5.3', '6.3']) assert(money.includes(`href="/curators/${rwSlug(id)}">K-${id}</a>`), `Money lines: K-${id}`);
 });
 
 console.log(`\n${passed} passed, ${failed} failed, ${skipped} skipped`);
